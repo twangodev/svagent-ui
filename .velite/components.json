@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Button",
+    "description": "A button component with multiple variants and sizes.",
+    "path": "components/button",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/button"
+    },
+    "component": true,
+    "toc": [
+      {
+        "title": "Button",
+        "url": "#button",
+        "items": []
+      }
+    ],
+    "slug": "button",
+    "slugFull": "/components/button"
+  },
+  {
+    "title": "Components",
+    "description": "Browse the available components in svagent-ui.",
+    "path": "components",
+    "component": false,
+    "toc": [
+      {
+        "title": "Components",
+        "url": "#components",
+        "items": []
+      }
+    ],
+    "slug": "",
+    "slugFull": "/components"
+  }
+]

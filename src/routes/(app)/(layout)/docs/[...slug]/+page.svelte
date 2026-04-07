@@ -1,0 +1,108 @@
+<script lang="ts">
+	import { Button } from "$lib/registry/ui/button/index.js";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import DocsToc from "$lib/components/docs-toc.svelte";
+	import { findNeighbors } from "$lib/navigation.js";
+	import { page } from "$app/state";
+	import Metadata from "$lib/components/metadata.svelte";
+
+	let { data } = $props();
+
+	const Markdown = $derived(data.component);
+	const doc = $derived(data.metadata);
+
+	const neighbors = $derived(findNeighbors(page.url.pathname));
+</script>
+
+<Metadata title={doc.title} description={doc.description} ogType="article" />
+
+<div
+	data-slot="docs"
+	class="flex flex-row-reverse items-stretch text-[1.05rem] sm:text-[15px] xl:w-full"
+	id="main-content"
+>
+	<div
+		class="sticky top-[calc(var(--header-height)+1px)] z-30 ms-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex"
+	>
+		<div class="h-(--top-spacing) shrink-0"></div>
+		{#if doc.toc.length}
+			<div class="no-scrollbar overflow-y-auto px-8">
+				<DocsToc toc={{ items: doc.toc }} />
+				<div class="h-12"></div>
+			</div>
+		{/if}
+	</div>
+	<div class="flex min-w-0 flex-1 flex-col">
+		<div class="h-(--top-spacing) shrink-0"></div>
+		<div
+			class="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300"
+		>
+			<div class="flex flex-col gap-2">
+				<div class="flex items-start justify-between">
+					<h1
+						class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+					>
+						{doc.title}
+					</h1>
+					<div class="flex items-center gap-2">
+						{#if neighbors.previous}
+							<Button
+								variant="secondary"
+								size="icon"
+								class="size-8 shadow-none md:size-7"
+								href={neighbors.previous.href}
+							>
+								<ArrowLeftIcon />
+								<span class="sr-only">Previous</span>
+							</Button>
+						{/if}
+						{#if neighbors.next}
+							<Button
+								variant="secondary"
+								size="icon"
+								class="size-8 shadow-none md:size-7"
+								href={neighbors.next.href}
+							>
+								<span class="sr-only">Next</span>
+								<ArrowRightIcon />
+							</Button>
+						{/if}
+					</div>
+				</div>
+				{#if doc.description}
+					<p class="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
+						{doc.description}
+					</p>
+				{/if}
+			</div>
+			<div class="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+				<Markdown />
+			</div>
+		</div>
+		<div class="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
+			{#if neighbors.previous}
+				<Button
+					variant="secondary"
+					size="sm"
+					class="shadow-none"
+					href={neighbors.previous.href}
+				>
+					<ArrowLeftIcon />
+					{neighbors.previous.title}
+				</Button>
+			{/if}
+			{#if neighbors.next}
+				<Button
+					variant="secondary"
+					size="sm"
+					class="ms-auto shadow-none"
+					href={neighbors.next.href}
+				>
+					{neighbors.next.title}
+					<ArrowRightIcon />
+				</Button>
+			{/if}
+		</div>
+	</div>
+</div>

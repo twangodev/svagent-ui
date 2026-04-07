@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Introduction",
+    "description": "A component registry for building AI agent interfaces with Svelte 5.",
+    "path": "index",
+    "component": false,
+    "toc": [
+      {
+        "title": "svagent-ui",
+        "url": "#svagent-ui",
+        "items": [
+          {
+            "title": "Features",
+            "url": "#features",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "",
+    "slugFull": "/index"
+  }
+]

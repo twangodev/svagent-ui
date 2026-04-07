@@ -22,13 +22,7 @@
       "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/message"
     },
     "component": true,
-    "toc": [
-      {
-        "title": "Message",
-        "url": "#message",
-        "items": []
-      }
-    ],
+    "toc": [],
     "slug": "message",
     "slugFull": "/components/message"
   },
@@ -40,13 +34,7 @@
       "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/response"
     },
     "component": true,
-    "toc": [
-      {
-        "title": "Response",
-        "url": "#response",
-        "items": []
-      }
-    ],
+    "toc": [],
     "slug": "response",
     "slugFull": "/components/response"
   },
@@ -58,13 +46,7 @@
       "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/shimmering-text"
     },
     "component": true,
-    "toc": [
-      {
-        "title": "Shimmering Text",
-        "url": "#shimmering-text",
-        "items": []
-      }
-    ],
+    "toc": [],
     "slug": "shimmering-text",
     "slugFull": "/components/shimmering-text"
   }

@@ -2,9 +2,9 @@
 	import { Message, MessageContent } from "$lib/registry/ui/message/index.js";
 	import { Response } from "$lib/registry/ui/response/index.js";
 
-	const assistantMessage = `To create a new agent with **ElevenLabs Agents**, head to this link: [https://elevenlabs.io/app/agents](https://elevenlabs.io/app/agents).
+	const assistantMessage = `To create a new **voice agent**, head to the [Acme dashboard](https://example.com/agents). Then follow these steps:
 
-1. Sign in to your ElevenLabs account.
+1. Sign in to your provider dashboard.
 2. Click **New Agent** to start.
 3. Give your agent a name and description.
 4. Configure its behavior, knowledge sources, and voice.

@@ -1,23 +1,5 @@
 [
   {
-    "title": "Button",
-    "description": "A button component with multiple variants and sizes.",
-    "path": "components/button",
-    "links": {
-      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/button"
-    },
-    "component": true,
-    "toc": [
-      {
-        "title": "Button",
-        "url": "#button",
-        "items": []
-      }
-    ],
-    "slug": "button",
-    "slugFull": "/components/button"
-  },
-  {
     "title": "Components",
     "description": "Browse the available components in svagent-ui.",
     "path": "components",
@@ -31,5 +13,59 @@
     ],
     "slug": "",
     "slugFull": "/components"
+  },
+  {
+    "title": "Message",
+    "description": "A chat message component with avatar and content slots.",
+    "path": "components/message",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/message"
+    },
+    "component": true,
+    "toc": [
+      {
+        "title": "Message",
+        "url": "#message",
+        "items": []
+      }
+    ],
+    "slug": "message",
+    "slugFull": "/components/message"
+  },
+  {
+    "title": "Response",
+    "description": "A streaming-friendly text response component for AI agent output.",
+    "path": "components/response",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/response"
+    },
+    "component": true,
+    "toc": [
+      {
+        "title": "Response",
+        "url": "#response",
+        "items": []
+      }
+    ],
+    "slug": "response",
+    "slugFull": "/components/response"
+  },
+  {
+    "title": "Shimmering Text",
+    "description": "An animated shimmering text effect, ideal for loading and \"thinking\" states.",
+    "path": "components/shimmering-text",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/shimmering-text"
+    },
+    "component": true,
+    "toc": [
+      {
+        "title": "Shimmering Text",
+        "url": "#shimmering-text",
+        "items": []
+      }
+    ],
+    "slug": "shimmering-text",
+    "slugFull": "/components/shimmering-text"
   }
 ]

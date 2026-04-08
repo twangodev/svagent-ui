@@ -1,6 +1,6 @@
 {
 	"$schema": "https://shadcn-svelte.com/schema/registry.json",
 	"name": "svagent",
-	"homepage": "https://svagent.twango.dev",
+	"homepage": "https://svagent.ui.twango.dev",
 	"items": []
 }

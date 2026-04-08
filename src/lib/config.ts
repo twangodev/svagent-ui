@@ -1,8 +1,8 @@
 export const siteConfig = {
 	name: "svagent-ui",
-	url: "https://svagent.twango.dev",
+	url: "https://svagent.ui.twango.dev",
 	ogImage: {
-		url: "https://svagent.twango.dev/og.png",
+		url: "https://svagent.ui.twango.dev/og.png",
 		width: "1200",
 		height: "630",
 	},

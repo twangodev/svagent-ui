@@ -55,7 +55,7 @@ npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/all.json
 ### UI Components
 
 | Component           | Description                                         | Status  |
-|---------------------|-----------------------------------------------------|---------|
+| ------------------- | --------------------------------------------------- | ------- |
 | `message`           | Chat message bubble with avatar and variant styling | Done    |
 | `response`          | Streaming markdown renderer for AI responses        | Done    |
 | `shimmering-text`   | Text with shimmer/gradient animation                | Done    |

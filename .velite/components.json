@@ -1,5 +1,17 @@
 [
   {
+    "title": "Conversation",
+    "description": "A scroll-aware chat container that auto-sticks to the bottom as new messages stream in.",
+    "path": "components/conversation",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/conversation"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "conversation",
+    "slugFull": "/components/conversation"
+  },
+  {
     "title": "Components",
     "description": "Browse the available components in svagent-ui.",
     "path": "components",

@@ -62,7 +62,7 @@ Components below are listed in recommended porting order: foundations first, the
 | `response`          | Streaming markdown renderer for AI responses        | Done    |
 | `shimmering-text`   | Text with shimmer/gradient animation                | Done    |
 | `scrub-bar`         | Audio timeline scrubber                             | Done    |
-| `conversation`      | Chat message container with auto-scroll             | Planned |
+| `conversation`      | Chat message container with auto-scroll             | Done    |
 | `audio-player`      | Full-featured audio playback with scrubbing         | Planned |
 | `waveform`          | Static audio waveform visualization                 | Planned |
 | `live-waveform`     | Real-time microphone waveform                       | Planned |

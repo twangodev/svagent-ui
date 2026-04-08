@@ -113,6 +113,9 @@ importers:
       shiki:
         specifier: ^4.0.2
         version: 4.0.2
+      stick-to-bottom-svelte:
+        specifier: ^1.0.3
+        version: 1.0.3(svelte@5.55.1)
       svelte:
         specifier: ^5.54.0
         version: 5.55.1
@@ -2503,6 +2506,11 @@ packages:
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+
+  stick-to-bottom-svelte@1.0.3:
+    resolution: {integrity: sha512-53gHJ73Tx0H/5MWZSfcBrihZwude/bHadi5XHVEFVpLEiSQnste8+Q/q1zQ3jK5zybfuvi0F+7bkZ0Li45QLPg==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
@@ -5490,6 +5498,10 @@ snapshots:
   source-map@0.7.6: {}
 
   space-separated-tokens@2.0.2: {}
+
+  stick-to-bottom-svelte@1.0.3(svelte@5.55.1):
+    dependencies:
+      svelte: 5.55.1
 
   stringify-entities@4.0.4:
     dependencies:

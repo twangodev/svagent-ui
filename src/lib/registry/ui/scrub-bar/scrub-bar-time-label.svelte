@@ -1,0 +1,26 @@
+<script lang="ts">
+	import type { HTMLAttributes } from "svelte/elements";
+	import { cn } from "$lib/utils.js";
+
+	function formatTimestamp(value: number): string {
+		if (!Number.isFinite(value) || value < 0) return "0:00";
+		const totalSeconds = Math.floor(value);
+		const minutes = Math.floor(totalSeconds / 60);
+		const seconds = totalSeconds % 60;
+		return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+	}
+
+	let {
+		class: className,
+		time,
+		format = formatTimestamp,
+		...restProps
+	}: HTMLAttributes<HTMLSpanElement> & {
+		time: number;
+		format?: (time: number) => string;
+	} = $props();
+</script>
+
+<span data-slot="scrub-bar-time-label" class={cn("tabular-nums", className)} {...restProps}>
+	{format(time)}
+</span>

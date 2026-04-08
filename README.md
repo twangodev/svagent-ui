@@ -54,25 +54,27 @@ npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/all.json
 
 ### UI Components
 
+Components below are listed in recommended porting order: foundations first, then composites that build on them, saving the heaviest lifts (Web Audio, Three.js) for last.
+
 | Component           | Description                                         | Status  |
 | ------------------- | --------------------------------------------------- | ------- |
 | `message`           | Chat message bubble with avatar and variant styling | Done    |
 | `response`          | Streaming markdown renderer for AI responses        | Done    |
 | `shimmering-text`   | Text with shimmer/gradient animation                | Done    |
+| `scrub-bar`         | Audio timeline scrubber                             | Done    |
+| `conversation`      | Chat message container with auto-scroll             | Planned |
+| `audio-player`      | Full-featured audio playback with scrubbing         | Planned |
 | `waveform`          | Static audio waveform visualization                 | Planned |
 | `live-waveform`     | Real-time microphone waveform                       | Planned |
-| `audio-player`      | Full-featured audio playback with scrubbing         | Planned |
-| `bar-visualizer`    | Audio frequency band visualization                  | Planned |
 | `voice-button`      | Voice input button with state feedback              | Planned |
-| `conversation`      | Chat message container with auto-scroll             | Planned |
-| `conversation-bar`  | Chat input bar with voice/text modes                | Planned |
-| `speech-input`      | Real-time speech-to-text input                      | Planned |
-| `transcript-viewer` | Synchronized transcript with audio playback         | Planned |
-| `voice-picker`      | Voice selection dropdown with preview               | Planned |
-| `scrub-bar`         | Audio timeline scrubber                             | Planned |
-| `matrix`            | LED matrix display with animations                  | Planned |
 | `mic-selector`      | Microphone device selector                          | Planned |
+| `matrix`            | LED matrix display with animations                  | Planned |
+| `bar-visualizer`    | Audio frequency band visualization                  | Planned |
+| `transcript-viewer` | Synchronized transcript with audio playback         | Planned |
+| `speech-input`      | Real-time speech-to-text input                      | Planned |
+| `conversation-bar`  | Chat input bar with voice/text modes                | Planned |
 | `orb`               | 3D animated voice agent visualization               | Planned |
+| `voice-picker`      | Voice selection dropdown with preview               | Planned |
 
 ### Provider-Agnostic
 

@@ -99,6 +99,18 @@
     "slugFull": "/components/shimmering-text"
   },
   {
+    "title": "Voice Button",
+    "description": "Stateful button with integrated live waveform feedback for voice recording, success/error states, and keyboard shortcut slots.",
+    "path": "components/voice-button",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/voice-button"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "voice-button",
+    "slugFull": "/components/voice-button"
+  },
+  {
     "title": "Waveform",
     "description": "Canvas-based audio waveform visualization components with recording, playback scrubbing, and microphone input support.",
     "path": "components/waveform",

@@ -66,7 +66,7 @@ Components below are listed in recommended porting order: foundations first, the
 | `audio-player`      | Full-featured audio playback with scrubbing         | Done    |
 | `waveform`          | Static audio waveform visualization                 | Done    |
 | `live-waveform`     | Real-time microphone waveform                       | Done    |
-| `voice-button`      | Voice input button with state feedback              | Planned |
+| `voice-button`      | Voice input button with state feedback              | Done    |
 | `mic-selector`      | Microphone device selector                          | Planned |
 | `matrix`            | LED matrix display with animations                  | Planned |
 | `bar-visualizer`    | Audio frequency band visualization                  | Planned |

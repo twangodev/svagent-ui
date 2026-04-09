@@ -12,6 +12,18 @@
     "slugFull": "/components/audio-player"
   },
   {
+    "title": "Bar Visualizer",
+    "description": "Audio frequency band visualizer with agent state animations. Renders a row of animated bars driven by a MediaStream via Web Audio's AnalyserNode, with built-in demo mode.",
+    "path": "components/bar-visualizer",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/bar-visualizer"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "bar-visualizer",
+    "slugFull": "/components/bar-visualizer"
+  },
+  {
     "title": "Conversation",
     "description": "A scroll-aware chat container that auto-sticks to the bottom as new messages stream in.",
     "path": "components/conversation",

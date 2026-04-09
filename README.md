@@ -69,7 +69,7 @@ Components below are listed in recommended porting order: foundations first, the
 | `voice-button`      | Voice input button with state feedback              | Done    |
 | `mic-selector`      | Microphone device selector                          | Done    |
 | `matrix`            | LED matrix display with animations                  | Done    |
-| `bar-visualizer`    | Audio frequency band visualization                  | Planned |
+| `bar-visualizer`    | Audio frequency band visualization                  | Done    |
 | `transcript-viewer` | Synchronized transcript with audio playback         | Planned |
 | `speech-input`      | Real-time speech-to-text input                      | Planned |
 | `conversation-bar`  | Chat input bar with voice/text modes                | Planned |

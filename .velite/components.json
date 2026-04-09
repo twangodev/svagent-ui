@@ -39,6 +39,18 @@
     "slugFull": "/components"
   },
   {
+    "title": "Live Waveform",
+    "description": "Real-time canvas-based audio waveform visualizer with microphone input and customizable rendering modes.",
+    "path": "components/live-waveform",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/live-waveform"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "live-waveform",
+    "slugFull": "/components/live-waveform"
+  },
+  {
     "title": "Message",
     "description": "A chat message component with avatar and content slots.",
     "path": "components/message",

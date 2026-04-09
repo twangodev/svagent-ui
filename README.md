@@ -65,7 +65,7 @@ Components below are listed in recommended porting order: foundations first, the
 | `conversation`      | Chat message container with auto-scroll             | Done    |
 | `audio-player`      | Full-featured audio playback with scrubbing         | Done    |
 | `waveform`          | Static audio waveform visualization                 | Done    |
-| `live-waveform`     | Real-time microphone waveform                       | Planned |
+| `live-waveform`     | Real-time microphone waveform                       | Done    |
 | `voice-button`      | Voice input button with state feedback              | Planned |
 | `mic-selector`      | Microphone device selector                          | Planned |
 | `matrix`            | LED matrix display with animations                  | Planned |

@@ -51,6 +51,18 @@
     "slugFull": "/components/live-waveform"
   },
   {
+    "title": "Matrix",
+    "description": "Retro dot-matrix LED display with circular cells and smooth animations. Supports static patterns, animated frame sequences, and VU meter mode.",
+    "path": "components/matrix",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/matrix"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "matrix",
+    "slugFull": "/components/matrix"
+  },
+  {
     "title": "Message",
     "description": "A chat message component with avatar and content slots.",
     "path": "components/message",

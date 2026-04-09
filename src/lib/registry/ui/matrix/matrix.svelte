@@ -1,0 +1,217 @@
+<script lang="ts" module>
+	import type { HTMLAttributes } from "svelte/elements";
+	import type { Frame } from "./presets.js";
+
+	export type MatrixMode = "default" | "vu";
+
+	export type MatrixProps = HTMLAttributes<HTMLDivElement> & {
+		rows: number;
+		cols: number;
+		pattern?: Frame;
+		frames?: Frame[];
+		fps?: number;
+		autoplay?: boolean;
+		loop?: boolean;
+		size?: number;
+		gap?: number;
+		palette?: { on: string; off: string };
+		brightness?: number;
+		ariaLabel?: string;
+		onFrame?: (index: number) => void;
+		mode?: MatrixMode;
+		levels?: number[];
+		ref?: HTMLDivElement | null;
+	};
+</script>
+
+<script lang="ts">
+	import { cn } from "$lib/utils.js";
+	import { clamp, ensureFrameSize, vu } from "./presets.js";
+
+	let {
+		rows,
+		cols,
+		pattern,
+		frames,
+		fps = 12,
+		autoplay = true,
+		loop = true,
+		size = 10,
+		gap = 2,
+		palette = { on: "currentColor", off: "var(--muted-foreground)" },
+		brightness = 1,
+		ariaLabel,
+		onFrame,
+		mode = "default",
+		levels,
+		class: className,
+		ref = $bindable(null),
+		...restProps
+	}: MatrixProps = $props();
+
+	let frameIndex = $state(0);
+	let isPlaying = $state(true);
+	let rafId: number | null = null;
+	let lastTime = 0;
+	let accumulator = 0;
+
+	// Reset animation state when frames or autoplay change (mirrors React dep array)
+	$effect(() => {
+		void frames;
+		frameIndex = 0;
+		isPlaying = autoplay && !pattern;
+		lastTime = 0;
+		accumulator = 0;
+	});
+
+	// Animation loop — fixed-timestep accumulator
+	$effect(() => {
+		if (!frames || frames.length === 0 || !isPlaying) return;
+		const frameInterval = 1000 / fps;
+		// Capture loop + onFrame so effect re-runs on changes
+		const currentLoop = loop;
+		const currentOnFrame = onFrame;
+
+		const animate = (currentTime: number) => {
+			if (lastTime === 0) lastTime = currentTime;
+			const deltaTime = currentTime - lastTime;
+			lastTime = currentTime;
+			accumulator += deltaTime;
+
+			if (accumulator >= frameInterval) {
+				accumulator -= frameInterval;
+				const next = frameIndex + 1;
+				if (next >= frames!.length) {
+					if (currentLoop) {
+						frameIndex = 0;
+						currentOnFrame?.(0);
+					} else {
+						isPlaying = false;
+						return;
+					}
+				} else {
+					frameIndex = next;
+					currentOnFrame?.(next);
+				}
+			}
+
+			rafId = requestAnimationFrame(animate);
+		};
+
+		rafId = requestAnimationFrame(animate);
+
+		return () => {
+			if (rafId !== null) {
+				cancelAnimationFrame(rafId);
+				rafId = null;
+			}
+		};
+	});
+
+	const currentFrame = $derived.by(() => {
+		if (mode === "vu" && levels && levels.length > 0) {
+			return ensureFrameSize(vu(cols, levels), rows, cols);
+		}
+		if (pattern) {
+			return ensureFrameSize(pattern, rows, cols);
+		}
+		if (frames && frames.length > 0) {
+			return ensureFrameSize(frames[frameIndex] || frames[0], rows, cols);
+		}
+		return ensureFrameSize([], rows, cols);
+	});
+
+	const cellPositions = $derived.by(() => {
+		const positions: { x: number; y: number }[][] = [];
+		for (let row = 0; row < rows; row++) {
+			positions[row] = [];
+			for (let col = 0; col < cols; col++) {
+				positions[row][col] = {
+					x: col * (size + gap),
+					y: row * (size + gap),
+				};
+			}
+		}
+		return positions;
+	});
+
+	const svgDimensions = $derived({
+		width: cols * (size + gap) - gap,
+		height: rows * (size + gap) - gap,
+	});
+
+	const isAnimating = $derived(!pattern && !!frames && frames.length > 0);
+</script>
+
+<div
+	bind:this={ref}
+	data-slot="matrix"
+	role="img"
+	aria-label={ariaLabel ?? "matrix display"}
+	aria-live={isAnimating ? "polite" : undefined}
+	class={cn("relative inline-block", className)}
+	style="--matrix-on: {palette.on}; --matrix-off: {palette.off}; --matrix-gap: {gap}px; --matrix-size: {size}px;"
+	{...restProps}
+>
+	<svg
+		width={svgDimensions.width}
+		height={svgDimensions.height}
+		viewBox="0 0 {svgDimensions.width} {svgDimensions.height}"
+		xmlns="http://www.w3.org/2000/svg"
+		class="block"
+		style="overflow: visible;"
+	>
+		<defs>
+			<radialGradient id="matrix-pixel-on" cx="50%" cy="50%" r="50%">
+				<stop offset="0%" stop-color="var(--matrix-on)" stop-opacity="1" />
+				<stop offset="70%" stop-color="var(--matrix-on)" stop-opacity="0.85" />
+				<stop offset="100%" stop-color="var(--matrix-on)" stop-opacity="0.6" />
+			</radialGradient>
+			<radialGradient id="matrix-pixel-off" cx="50%" cy="50%" r="50%">
+				<stop offset="0%" stop-color="var(--muted-foreground)" stop-opacity="1" />
+				<stop offset="100%" stop-color="var(--muted-foreground)" stop-opacity="0.7" />
+			</radialGradient>
+			<filter id="matrix-glow" x="-50%" y="-50%" width="200%" height="200%">
+				<feGaussianBlur stdDeviation="2" result="blur" />
+				<feComposite in="SourceGraphic" in2="blur" operator="over" />
+			</filter>
+		</defs>
+
+		{#each currentFrame as row, rowIndex (rowIndex)}
+			{#each row as value, colIndex (colIndex)}
+				{@const pos = cellPositions[rowIndex]?.[colIndex]}
+				{#if pos}
+					{@const opacity = clamp(brightness * value)}
+					{@const isActive = opacity > 0.5}
+					{@const isOn = opacity > 0.05}
+					<circle
+						class={cn(
+							"matrix-pixel",
+							isActive && "matrix-pixel-active",
+							!isOn && "opacity-20 dark:opacity-[0.1]"
+						)}
+						cx={pos.x + size / 2}
+						cy={pos.y + size / 2}
+						r={(size / 2) * 0.9}
+						fill={isOn ? "url(#matrix-pixel-on)" : "url(#matrix-pixel-off)"}
+						opacity={isOn ? opacity : 0.1}
+						style="transform: scale({isActive ? 1.1 : 1});"
+					/>
+				{/if}
+			{/each}
+		{/each}
+	</svg>
+</div>
+
+<style>
+	:global(.matrix-pixel) {
+		transition:
+			opacity 300ms ease-out,
+			transform 150ms ease-out;
+		transform-origin: center;
+		transform-box: fill-box;
+	}
+	:global(.matrix-pixel-active) {
+		filter: url(#matrix-glow);
+	}
+</style>

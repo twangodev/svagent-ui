@@ -68,7 +68,7 @@ Components below are listed in recommended porting order: foundations first, the
 | `live-waveform`     | Real-time microphone waveform                       | Done    |
 | `voice-button`      | Voice input button with state feedback              | Done    |
 | `mic-selector`      | Microphone device selector                          | Done    |
-| `matrix`            | LED matrix display with animations                  | Planned |
+| `matrix`            | LED matrix display with animations                  | Done    |
 | `bar-visualizer`    | Audio frequency band visualization                  | Planned |
 | `transcript-viewer` | Synchronized transcript with audio playback         | Planned |
 | `speech-input`      | Real-time speech-to-text input                      | Planned |

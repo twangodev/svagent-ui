@@ -1,0 +1,146 @@
+import { getContext, setContext } from "svelte";
+import type { TranscriptionAdapter } from "./types.js";
+
+export type SpeechInputStatus = "idle" | "connecting" | "connected" | "error";
+export type ButtonSize = "default" | "sm" | "lg";
+
+export interface SpeechInputData {
+	partialTranscript: string;
+	committedTranscripts: string[];
+	transcript: string;
+}
+
+export interface SpeechInputCallbacks {
+	onStart?: (data: SpeechInputData) => void;
+	onStop?: (data: SpeechInputData) => void;
+	onCancel?: (data: SpeechInputData) => void;
+	onChange?: (data: SpeechInputData) => void;
+	onError?: (error: Error) => void;
+}
+
+const SPEECH_INPUT_CONTEXT_KEY = Symbol("svagent-speech-input");
+
+export class SpeechInputState {
+	// Reactive state — written by methods, read by sub-components via context.
+	status: SpeechInputStatus = $state("idle");
+	partialTranscript = $state("");
+	committedTranscripts: string[] = $state([]);
+	error: string | null = $state(null);
+	size: ButtonSize = $state("default");
+
+	// Derived fields
+	isConnected = $derived(this.status === "connected");
+	isConnecting = $derived(this.status === "connecting");
+	transcript = $derived.by(() => {
+		const committed = this.committedTranscripts.join(" ").trim();
+		const partial = this.partialTranscript.trim();
+		if (committed && partial) return `${committed} ${partial}`;
+		return committed || partial;
+	});
+
+	// Non-reactive refs. Stored as plain private fields because the adapter
+	// reference must NOT create a reactive dependency — swapping adapters
+	// mid-recording is unsupported by design.
+	#adapter: TranscriptionAdapter | null = null;
+	#requestId = 0;
+	#callbacks: SpeechInputCallbacks = {};
+
+	/**
+	 * Imperatively wire the adapter + user callbacks. Called from the root
+	 * component's `$effect` on every render so fresh closures are captured.
+	 */
+	configure(params: { adapter: TranscriptionAdapter; callbacks: SpeechInputCallbacks }): void {
+		this.#adapter = params.adapter;
+		this.#callbacks = params.callbacks;
+	}
+
+	start = async (): Promise<void> => {
+		// Allow restart from "idle" or "error" — but not while actively recording.
+		// The error path leaves status === "error"; without this, users would be
+		// stuck and unable to retry after a failed start.
+		if (!this.#adapter || this.status === "connecting" || this.status === "connected") return;
+		const id = ++this.#requestId;
+
+		this.partialTranscript = "";
+		this.committedTranscripts = [];
+		this.error = null;
+		this.status = "connecting";
+
+		try {
+			await this.#adapter.start({
+				onConnect: () => {
+					if (this.#requestId !== id) return;
+					this.status = "connected";
+					this.#callbacks.onStart?.(this.#data());
+				},
+				onPartialTranscript: (text) => {
+					if (this.#requestId !== id) return;
+					this.partialTranscript = text;
+					this.#callbacks.onChange?.(this.#data());
+				},
+				onCommittedTranscript: (text) => {
+					if (this.#requestId !== id) return;
+					this.committedTranscripts = [...this.committedTranscripts, text];
+					this.partialTranscript = "";
+					this.#callbacks.onChange?.(this.#data());
+				},
+				onDisconnect: () => {
+					if (this.#requestId !== id) return;
+					if (this.status === "connected") {
+						this.partialTranscript = "";
+						this.status = "idle";
+					}
+				},
+				onError: (err) => {
+					if (this.#requestId !== id) return;
+					this.error = err.message;
+					this.status = "error";
+					this.#callbacks.onError?.(err);
+				},
+			});
+		} catch (err) {
+			if (this.#requestId !== id) return;
+			const error = err instanceof Error ? err : new Error(String(err));
+			this.error = error.message;
+			this.status = "error";
+			this.#callbacks.onError?.(error);
+		}
+	};
+
+	stop = (): void => {
+		++this.#requestId; // invalidate in-flight adapter callbacks
+		this.#adapter?.stop();
+		if (this.status !== "idle") this.status = "idle";
+		this.#callbacks.onStop?.(this.#data());
+	};
+
+	cancel = (): void => {
+		++this.#requestId;
+		const data = this.#data(); // snapshot BEFORE clearing, for the callback
+		this.#adapter?.cancel();
+		this.partialTranscript = "";
+		this.committedTranscripts = [];
+		this.status = "idle";
+		this.#callbacks.onCancel?.(data);
+	};
+
+	#data = (): SpeechInputData => ({
+		partialTranscript: this.partialTranscript,
+		committedTranscripts: [...this.committedTranscripts],
+		transcript: this.transcript,
+	});
+}
+
+export function setSpeechInput(): SpeechInputState {
+	const state = new SpeechInputState();
+	setContext(SPEECH_INPUT_CONTEXT_KEY, state);
+	return state;
+}
+
+export function useSpeechInput(): SpeechInputState {
+	const ctx = getContext<SpeechInputState | undefined>(SPEECH_INPUT_CONTEXT_KEY);
+	if (!ctx) {
+		throw new Error("useSpeechInput must be called within a <SpeechInput>");
+	}
+	return ctx;
+}

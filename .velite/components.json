@@ -135,6 +135,18 @@
     "slugFull": "/components/shimmering-text"
   },
   {
+    "title": "Speech Input",
+    "description": "A compact speech-to-text input component with a provider-agnostic transcription adapter. Ships with a Web Speech API adapter for demos; users supply their own for ElevenLabs Scribe, Deepgram, or other providers.",
+    "path": "components/speech-input",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/speech-input"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "speech-input",
+    "slugFull": "/components/speech-input"
+  },
+  {
     "title": "Transcript Viewer",
     "description": "Synchronized transcript with audio playback. Highlights each word as it's spoken, supports seeking via scrub bar, and exposes a compound-component API with provider-agnostic character-alignment data.",
     "path": "components/transcript-viewer",

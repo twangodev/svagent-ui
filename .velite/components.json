@@ -24,6 +24,18 @@
     "slugFull": "/components/bar-visualizer"
   },
   {
+    "title": "Conversation Bar",
+    "description": "A compact conversation input bar with voice and text modes. Provider-agnostic — pass a ConversationAdapter wired to ElevenLabs, OpenAI Realtime, or any voice/chat backend.",
+    "path": "components/conversation-bar",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/conversation-bar"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "conversation-bar",
+    "slugFull": "/components/conversation-bar"
+  },
+  {
     "title": "Conversation",
     "description": "A scroll-aware chat container that auto-sticks to the bottom as new messages stream in.",
     "path": "components/conversation",

@@ -63,6 +63,7 @@
 		transform: (t) => {
 			t.wrapS = THREE.RepeatWrapping;
 			t.wrapT = THREE.RepeatWrapping;
+			t.colorSpace = THREE.NoColorSpace;
 			return t;
 		},
 	});

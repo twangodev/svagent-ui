@@ -16,7 +16,7 @@
 
 <script lang="ts">
 	import { Canvas } from "@threlte/core";
-	import { WebGLRenderer } from "three";
+	import { ACESFilmicToneMapping, WebGLRenderer } from "three";
 	import OrbScene from "./orb-scene.svelte";
 	import { cn } from "$lib/utils.js";
 
@@ -40,6 +40,7 @@
 
 <div data-slot="orb" class={cn("relative h-full w-full", className)} {...restProps}>
 	<Canvas
+		toneMapping={ACESFilmicToneMapping}
 		createRenderer={(canvas) =>
 			new WebGLRenderer({
 				canvas,

@@ -56,25 +56,25 @@ npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/all.json
 
 Components below are listed in recommended porting order: foundations first, then composites that build on them, saving the heaviest lifts (Web Audio, Three.js) for last.
 
-| Component           | Description                                         | Status  |
-| ------------------- | --------------------------------------------------- | ------- |
-| `message`           | Chat message bubble with avatar and variant styling | Done    |
-| `response`          | Streaming markdown renderer for AI responses        | Done    |
-| `shimmering-text`   | Text with shimmer/gradient animation                | Done    |
-| `scrub-bar`         | Audio timeline scrubber                             | Done    |
-| `conversation`      | Chat message container with auto-scroll             | Done    |
-| `audio-player`      | Full-featured audio playback with scrubbing         | Done    |
-| `waveform`          | Static audio waveform visualization                 | Done    |
-| `live-waveform`     | Real-time microphone waveform                       | Done    |
-| `voice-button`      | Voice input button with state feedback              | Done    |
-| `mic-selector`      | Microphone device selector                          | Done    |
-| `matrix`            | LED matrix display with animations                  | Done    |
-| `bar-visualizer`    | Audio frequency band visualization                  | Done    |
-| `transcript-viewer` | Synchronized transcript with audio playback         | Done    |
-| `speech-input`      | Real-time speech-to-text input                      | Done    |
-| `conversation-bar`  | Chat input bar with voice/text modes                | Done    |
-| `orb`               | 3D animated voice agent visualclzation              | Done    |
-| `voice-picker`      | Voice selection dropdown with preview               | Planned |
+| Component           | Description                                         | Status |
+| ------------------- | --------------------------------------------------- | ------ |
+| `message`           | Chat message bubble with avatar and variant styling | Done   |
+| `response`          | Streaming markdown renderer for AI responses        | Done   |
+| `shimmering-text`   | Text with shimmer/gradient animation                | Done   |
+| `scrub-bar`         | Audio timeline scrubber                             | Done   |
+| `conversation`      | Chat message container with auto-scroll             | Done   |
+| `audio-player`      | Full-featured audio playback with scrubbing         | Done   |
+| `waveform`          | Static audio waveform visualization                 | Done   |
+| `live-waveform`     | Real-time microphone waveform                       | Done   |
+| `voice-button`      | Voice input button with state feedback              | Done   |
+| `mic-selector`      | Microphone device selector                          | Done   |
+| `matrix`            | LED matrix display with animations                  | Done   |
+| `bar-visualizer`    | Audio frequency band visualization                  | Done   |
+| `transcript-viewer` | Synchronized transcript with audio playback         | Done   |
+| `speech-input`      | Real-time speech-to-text input                      | Done   |
+| `conversation-bar`  | Chat input bar with voice/text modes                | Done   |
+| `orb`               | 3D animated voice agent visualclzation              | Done   |
+| `voice-picker`      | Voice selection dropdown with preview               | Done   |
 
 ### Provider-Agnostic
 

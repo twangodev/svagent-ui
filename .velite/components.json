@@ -195,6 +195,18 @@
     "slugFull": "/components/voice-button"
   },
   {
+    "title": "Voice Picker",
+    "description": "A searchable voice selector with audio preview and Orb visualization. Provider-agnostic — pass any voices matching the Voice interface from ElevenLabs, OpenAI, Cartesia, or a custom backend.",
+    "path": "components/voice-picker",
+    "links": {
+      "source": "https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/voice-picker"
+    },
+    "component": true,
+    "toc": [],
+    "slug": "voice-picker",
+    "slugFull": "/components/voice-picker"
+  },
+  {
     "title": "Waveform",
     "description": "Canvas-based audio waveform visualization components with recording, playback scrubbing, and microphone input support.",
     "path": "components/waveform",

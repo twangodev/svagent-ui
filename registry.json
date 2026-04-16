@@ -2,5 +2,602 @@
 	"$schema": "https://shadcn-svelte.com/schema/registry.json",
 	"name": "svagent",
 	"homepage": "https://svagent.ui.twango.dev",
-	"items": []
+	"items": [
+		{
+			"name": "audio-player",
+			"type": "registry:ui",
+			"title": "Audio Player",
+			"description": "A compound audio player with play/pause, progress scrubbing, duration, time, and playback-speed controls.",
+			"dependencies": ["@lucide/svelte", "bits-ui"],
+			"registryDependencies": ["button", "dropdown-menu"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-duration.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-duration.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-progress.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-progress.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-speed.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-speed.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-speed-button-group.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-speed-button-group.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/audio-player-time.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/audio-player-time.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/context.svelte.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/context.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/utils.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/utils.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/example-tracks.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/example-tracks.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/audio-player/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/audio-player/index.ts"
+				}
+			]
+		},
+		{
+			"name": "bar-visualizer",
+			"type": "registry:ui",
+			"title": "Bar Visualizer",
+			"description": "A discrete bar-style audio level visualizer driven by a frequency array.",
+			"dependencies": [],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/bar-visualizer/bar-visualizer.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/bar-visualizer/bar-visualizer.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/bar-visualizer/utils.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/bar-visualizer/utils.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/bar-visualizer/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/bar-visualizer/index.ts"
+				}
+			]
+		},
+		{
+			"name": "conversation",
+			"type": "registry:ui",
+			"title": "Conversation",
+			"description": "A scroll-anchored conversation container with empty state and scroll-to-bottom button.",
+			"dependencies": ["@lucide/svelte", "stick-to-bottom-svelte"],
+			"registryDependencies": ["button"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/conversation/conversation.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/conversation.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation/conversation-content.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/conversation-content.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation/conversation-empty-state.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/conversation-empty-state.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation/conversation-scroll-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/conversation-scroll-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation/context.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/context.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation/index.ts"
+				}
+			]
+		},
+		{
+			"name": "conversation-bar",
+			"type": "registry:ui",
+			"title": "Conversation Bar",
+			"description": "A composable input bar for voice and text conversations with mic toggle, live waveform, and submit.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["button", "card", "live-waveform", "separator", "textarea"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/conversation-bar/conversation-bar.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation-bar/conversation-bar.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation-bar/types.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation-bar/types.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/conversation-bar/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/conversation-bar/index.ts"
+				}
+			]
+		},
+		{
+			"name": "live-waveform",
+			"type": "registry:ui",
+			"title": "Live Waveform",
+			"description": "A real-time audio waveform visualizer driven by a frequency array.",
+			"dependencies": [],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/live-waveform/live-waveform.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/live-waveform/live-waveform.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/live-waveform/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/live-waveform/index.ts"
+				}
+			]
+		},
+		{
+			"name": "matrix",
+			"type": "registry:ui",
+			"title": "Matrix",
+			"description": "An ambient dot-matrix canvas animation with configurable presets.",
+			"dependencies": [],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/matrix/matrix.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/matrix/matrix.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/matrix/presets.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/matrix/presets.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/matrix/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/matrix/index.ts"
+				}
+			]
+		},
+		{
+			"name": "message",
+			"type": "registry:ui",
+			"title": "Message",
+			"description": "A chat message primitive with role-based variants, avatar, and content slots.",
+			"dependencies": ["bits-ui", "tailwind-variants"],
+			"registryDependencies": ["avatar"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/message/message.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/message/message.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/message/message-avatar.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/message/message-avatar.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/message/message-content.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/message/message-content.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/message/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/message/index.ts"
+				}
+			]
+		},
+		{
+			"name": "mic-selector",
+			"type": "registry:ui",
+			"title": "Mic Selector",
+			"description": "A microphone device picker with live level preview and permission handling.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["button", "live-waveform"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/mic-selector/mic-selector.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/mic-selector/mic-selector.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/mic-selector/use-audio-devices.svelte.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/mic-selector/use-audio-devices.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/mic-selector/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/mic-selector/index.ts"
+				}
+			]
+		},
+		{
+			"name": "orb",
+			"type": "registry:ui",
+			"title": "Orb",
+			"description": "A 3D animated orb built with Three.js + Threlte, audio-reactive with GLSL shaders.",
+			"dependencies": ["@threlte/core", "@threlte/extras", "mode-watcher", "three"],
+			"devDependencies": ["@types/three"],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/orb/orb.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/orb/orb.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/orb-scene.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/orb/orb-scene.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/types.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/orb/types.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/shaders/orb.frag.glsl",
+					"type": "registry:file",
+					"target": "lib/components/ui/orb/shaders/orb.frag.glsl"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/shaders/orb.vert.glsl",
+					"type": "registry:file",
+					"target": "lib/components/ui/orb/shaders/orb.vert.glsl"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/shaders/glsl.d.ts",
+					"type": "registry:file",
+					"target": "lib/components/ui/orb/shaders/glsl.d.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/orb/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/orb/index.ts"
+				}
+			]
+		},
+		{
+			"name": "response",
+			"type": "registry:ui",
+			"title": "Response",
+			"description": "A streaming markdown response renderer with code, math, and mermaid support.",
+			"dependencies": ["svelte-streamdown"],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/response/response.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/response/response.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/response/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/response/index.ts"
+				}
+			]
+		},
+		{
+			"name": "scrub-bar",
+			"type": "registry:ui",
+			"title": "Scrub Bar",
+			"description": "A media scrub bar primitive with track, progress, thumb, and time label subcomponents.",
+			"dependencies": [],
+			"registryDependencies": ["progress"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/scrub-bar/scrub-bar.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/scrub-bar.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/scrub-bar-progress.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/scrub-bar-progress.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/scrub-bar-thumb.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/scrub-bar-thumb.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/scrub-bar-time-label.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/scrub-bar-time-label.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/scrub-bar-track.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/scrub-bar-track.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/context.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/context.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/scrub-bar/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/scrub-bar/index.ts"
+				}
+			]
+		},
+		{
+			"name": "shimmering-text",
+			"type": "registry:ui",
+			"title": "Shimmering Text",
+			"description": "A text component with an animated shimmer effect, optionally triggered when scrolled into view.",
+			"dependencies": ["motion"],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/shimmering-text/shimmering-text.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/shimmering-text/shimmering-text.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/shimmering-text/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/shimmering-text/index.ts"
+				}
+			]
+		},
+		{
+			"name": "speech-input",
+			"type": "registry:ui",
+			"title": "Speech Input",
+			"description": "A push-to-record speech input with preview, cancel, and a pluggable transcription adapter.",
+			"dependencies": ["@lucide/svelte", "tailwind-variants"],
+			"registryDependencies": ["button", "skeleton"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/speech-input/speech-input.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/speech-input.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/speech-input-cancel-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/speech-input-cancel-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/speech-input-preview.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/speech-input-preview.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/speech-input-record-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/speech-input-record-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/context.svelte.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/context.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/types.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/types.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/variants.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/variants.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/speech-input/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/speech-input/index.ts"
+				}
+			]
+		},
+		{
+			"name": "transcript-viewer",
+			"type": "registry:ui",
+			"title": "Transcript Viewer",
+			"description": "A word-synced transcript viewer with integrated audio playback and scrub bar.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["button"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer-audio.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer-audio.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer-play-pause-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer-play-pause-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer-scrub-bar.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer-scrub-bar.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer-word.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer-word.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/transcript-viewer-words.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/transcript-viewer-words.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/context.svelte.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/context.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/utils.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/utils.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/transcript-viewer/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/transcript-viewer/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-button",
+			"type": "registry:ui",
+			"title": "Voice Button",
+			"description": "A voice conversation toggle button with live mic waveform and start/stop state.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["button", "live-waveform"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/voice-button/voice-button.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-button/voice-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/voice-button/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-button/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-picker",
+			"type": "registry:ui",
+			"title": "Voice Picker",
+			"description": "A searchable voice selector with audio preview and orb visualization.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["audio-player", "button", "command", "orb", "popover"],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/voice-picker/voice-picker.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-picker/voice-picker.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/voice-picker/voice-picker-item.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-picker/voice-picker-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/voice-picker/types.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-picker/types.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/voice-picker/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/voice-picker/index.ts"
+				}
+			]
+		},
+		{
+			"name": "waveform",
+			"type": "registry:ui",
+			"title": "Waveform",
+			"description": "A family of audio waveform renderers: static, recording, scrolling, scrubber, and microphone variants.",
+			"dependencies": [],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/waveform/waveform.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-live-microphone.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-live-microphone.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-microphone.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-microphone.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-recording.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-recording.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-scrolling.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-scrolling.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-scrubber.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-scrubber.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/waveform-static.svelte",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/waveform-static.svelte"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/utils.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/utils.ts"
+				},
+				{
+					"path": "src/lib/registry/ui/waveform/index.ts",
+					"type": "registry:ui",
+					"target": "lib/components/ui/waveform/index.ts"
+				}
+			]
+		}
+	]
 }

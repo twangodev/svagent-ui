@@ -7,3 +7,11 @@ links:
 ---
 
 <ComponentPreview name="orb-demo" />
+
+## Installation
+
+<Install component="orb" />
+
+## Usage
+
+<Usage component="orb" />

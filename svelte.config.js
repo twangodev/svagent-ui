@@ -7,7 +7,7 @@ import { mdsxConfig } from "./mdsx.config.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), mdsx(mdsxConfig), componentPreviews()],
+	preprocess: [vitePreprocess(), docSugar(), mdsx(mdsxConfig), componentPreviews()],
 	extensions: [".svelte", ".md"],
 
 	kit: {
@@ -30,6 +30,70 @@ const config = {
 };
 
 export default config;
+
+/**
+ * Rewrites authoring sugar in .md docs into plain markdown BEFORE mdsx runs.
+ *
+ * Supported tags (must be self-closing with a `component="<name>"` attribute):
+ *   <Install component="orb" />  → ```bash fence with the shadcn-svelte CLI command
+ *   <Usage component="orb" />    → ```svelte fence with a minimal import + bare usage
+ *
+ * Expansion happens pre-mdsx so shiki highlights the resulting code fences
+ * naturally and mdsx's normal markdown pipeline handles everything downstream.
+ *
+ * The Usage expansion uses a PascalCase-of-kebab-name convention for the
+ * exported component (e.g. `audio-player` → `AudioPlayer`). Authors whose
+ * barrel exports an unusual name should write the fence manually instead.
+ *
+ * @returns {import("svelte/compiler").PreprocessorGroup}
+ */
+function docSugar() {
+	const INSTALL_REGEX = /<Install\s+component=["']([^"']+)["']\s*\/>/g;
+	const USAGE_REGEX = /<Usage\s+component=["']([^"']+)["']\s*\/>/g;
+
+	const toPascalCase = (/** @type {string} */ name) =>
+		name.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
+
+	const expandInstall = (/** @type {string} */ name) =>
+		["```bash", `npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/${name}.json`, "```"].join(
+			"\n",
+		);
+
+	const expandUsage = (/** @type {string} */ name) => {
+		const exportName = toPascalCase(name);
+		return [
+			"```svelte",
+			`<script lang="ts">`,
+			`\timport { ${exportName} } from "$lib/registry/ui/${name}";`,
+			`</script>`,
+			``,
+			`<${exportName} />`,
+			"```",
+		].join("\n");
+	};
+
+	return {
+		name: "doc-sugar",
+		markup: ({ content, filename }) => {
+			if (!filename?.endsWith(".md")) return;
+			if (!content.includes("<Install") && !content.includes("<Usage")) return;
+
+			const ms = new MagicString(content);
+
+			for (const match of content.matchAll(INSTALL_REGEX)) {
+				if (match.index === undefined) continue;
+				ms.overwrite(match.index, match.index + match[0].length, expandInstall(match[1]));
+			}
+
+			for (const match of content.matchAll(USAGE_REGEX)) {
+				if (match.index === undefined) continue;
+				ms.overwrite(match.index, match.index + match[0].length, expandUsage(match[1]));
+			}
+
+			return { code: ms.toString(), map: ms.generateMap() };
+		},
+	};
+}
 
 /**
  * @returns {import("svelte/compiler").PreprocessorGroup}

@@ -25,10 +25,10 @@ Render `<ModeWatcher />` once near the top of your root layout so the class is a
 
 ```svelte
 <script lang="ts">
-    import "../app.css";
-    import { ModeWatcher } from "mode-watcher";
+	import "../app.css";
+	import { ModeWatcher } from "mode-watcher";
 
-    let { children } = $props();
+	let { children } = $props();
 </script>
 
 <ModeWatcher />
@@ -55,11 +55,11 @@ The `:root` block defines the light-mode tokens, and a `.dark { ... }` block ove
 
 ```css
 :root {
-    --primary: oklch(0.205 0 0);
+	--primary: oklch(0.205 0 0);
 }
 
 .dark {
-    --primary: oklch(0.922 0 0);
+	--primary: oklch(0.922 0 0);
 }
 ```
 
@@ -71,12 +71,12 @@ Because every token is swapped in one place, you generally won't need to write y
 
 ```svelte
 <script lang="ts">
-    import { toggleMode } from "mode-watcher";
-    import { Button } from "$lib/registry/ui/button";
+	import { toggleMode } from "mode-watcher";
+	import { Button } from "$lib/registry/ui/button";
 </script>
 
 <Button variant="ghost" size="icon" onclick={toggleMode}>
-    <span class="sr-only">Toggle theme</span>
+	<span class="sr-only">Toggle theme</span>
 </Button>
 ```
 
@@ -88,9 +88,9 @@ When a component needs to branch on the active theme — for example to swap a s
 
 ```svelte
 <script lang="ts">
-    import { mode } from "mode-watcher";
+	import { mode } from "mode-watcher";
 
-    let isDark = $derived(mode.current === "dark");
+	let isDark = $derived(mode.current === "dark");
 </script>
 ```
 

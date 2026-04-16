@@ -44,11 +44,7 @@ export interface ConversationMessage {
 Status and mode are narrow string-literal unions:
 
 ```ts
-export type AgentConnectionState =
-	| "disconnected"
-	| "connecting"
-	| "connected"
-	| "disconnecting";
+export type AgentConnectionState = "disconnected" | "connecting" | "connected" | "disconnecting";
 
 export type ConversationMode = "speaking" | "listening";
 ```

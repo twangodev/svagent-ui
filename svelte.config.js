@@ -55,9 +55,11 @@ function docSugar() {
 		name.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
 
 	const expandInstall = (/** @type {string} */ name) =>
-		["```bash", `npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/${name}.json`, "```"].join(
-			"\n",
-		);
+		[
+			"```bash",
+			`npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/${name}.json`,
+			"```",
+		].join("\n");
 
 	const expandUsage = (/** @type {string} */ name) => {
 		const exportName = toPascalCase(name);

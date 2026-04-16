@@ -16,7 +16,18 @@
 		let raf: number | null = null;
 		const tick = () => {
 			const el = player.audio;
-			if (el) player.time = el.currentTime;
+			if (el) {
+				player.time = el.currentTime;
+				player.readyState = el.readyState;
+				player.networkState = el.networkState;
+				player.paused = el.paused;
+				player.error = el.error;
+				player.playbackRate = el.playbackRate;
+				const d = el.duration;
+				if (Number.isFinite(d) && player.duration !== d) {
+					player.duration = d;
+				}
+			}
 			raf = requestAnimationFrame(tick);
 		};
 		raf = requestAnimationFrame(tick);
@@ -38,13 +49,6 @@
 	}}
 	onplay={() => (player.paused = false)}
 	onpause={() => (player.paused = true)}
-	onplaying={() => {
-		player.paused = false;
-		player.isBuffering = false;
-	}}
-	onwaiting={() => (player.isBuffering = true)}
-	oncanplay={() => (player.isBuffering = false)}
-	onratechange={(e) => (player.playbackRate = e.currentTarget.playbackRate)}
 	onerror={() => (player.error = audioEl?.error ?? null)}
 	class="hidden"
 	crossorigin="anonymous"

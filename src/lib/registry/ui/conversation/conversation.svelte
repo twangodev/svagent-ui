@@ -8,9 +8,13 @@
 	let {
 		class: className,
 		children,
+		initial = "smooth" as ScrollBehavior,
+		resize = "smooth" as ScrollBehavior,
 		...restProps
 	}: HTMLAttributes<HTMLDivElement> & {
 		children?: Snippet;
+		initial?: ScrollBehavior;
+		resize?: ScrollBehavior;
 	} = $props();
 
 	let scrollEl: HTMLDivElement | null = $state(null);
@@ -19,8 +23,8 @@
 	const stickToBottom = new StickToBottom({
 		scrollElement: () => scrollEl as HTMLElement,
 		contentElement: () => contentEl as HTMLElement,
-		initial: "smooth",
-		resize: "smooth",
+		initial,
+		resize,
 	});
 
 	setConversationContext({

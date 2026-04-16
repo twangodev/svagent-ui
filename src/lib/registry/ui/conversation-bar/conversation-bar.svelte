@@ -69,9 +69,7 @@
 				onDisconnect: () => {
 					if (sessionId !== id) return;
 					agentState = "disconnected";
-					isMuted = false;
 					keyboardOpen = false;
-					textInput = "";
 					onDisconnect?.();
 				},
 				onMessage: (message) => {
@@ -101,9 +99,7 @@
 		++sessionId;
 		adapter.disconnect();
 		agentState = "disconnected";
-		isMuted = false;
 		keyboardOpen = false;
-		textInput = "";
 	}
 
 	function handleStartOrEnd() {
@@ -175,23 +171,25 @@
 										waveformClassName
 									)}
 								>
-									<LiveWaveform
-										active={isConnected && !isMuted}
-										processing={isConnecting}
-										barWidth={3}
-										barGap={1}
-										barRadius={4}
-										fadeEdges={true}
-										fadeWidth={24}
-										sensitivity={1.8}
-										smoothingTimeConstant={0.85}
-										height={20}
-										mode="static"
-										class={cn(
-											"h-full w-full transition-opacity duration-300",
-											agentState === "disconnected" && "opacity-0"
-										)}
-									/>
+									{#key agentState === "disconnected" ? "idle" : "active"}
+										<LiveWaveform
+											active={isConnected && !isMuted}
+											processing={isConnecting}
+											barWidth={3}
+											barGap={1}
+											barRadius={4}
+											fadeEdges={true}
+											fadeWidth={24}
+											sensitivity={1.8}
+											smoothingTimeConstant={0.85}
+											height={20}
+											mode="static"
+											class={cn(
+												"h-full w-full transition-opacity duration-300",
+												agentState === "disconnected" && "opacity-0"
+											)}
+										/>
+									{/key}
 									{#if agentState === "disconnected"}
 										<div class="absolute inset-0 flex items-center justify-center">
 											<span class="text-foreground/50 text-[10px] font-medium">

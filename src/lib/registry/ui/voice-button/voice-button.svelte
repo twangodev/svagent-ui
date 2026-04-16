@@ -63,6 +63,7 @@
 </script>
 
 <Button
+	type="button"
 	{variant}
 	{size}
 	disabled={isDisabled}

@@ -15,9 +15,11 @@ export class AudioPlayerState<TData = unknown> {
 	duration = $state<number | undefined>(undefined);
 	paused = $state(true);
 	playbackRate = $state(1);
-	isBuffering = $state(false);
+	readyState = $state(0);
+	networkState = $state(0);
 	error: MediaError | null = $state(null);
 
+	isBuffering = $derived(this.readyState < 3 && this.networkState === 2);
 	isPlaying = $derived(!this.paused);
 
 	#playPromise: Promise<void> | null = null;
@@ -101,9 +103,8 @@ export class AudioPlayerState<TData = unknown> {
 
 	setPlaybackRate = (rate: number): void => {
 		if (!this.audio) return;
+		this.playbackRate = rate;
 		this.audio.playbackRate = rate;
-		// The `ratechange` event listener on the audio element will sync
-		// `this.playbackRate` — no manual assignment needed here.
 	};
 }
 

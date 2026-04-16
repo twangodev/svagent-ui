@@ -38,8 +38,8 @@
 		...restProps
 	}: BarVisualizerProps = $props();
 
-	let realBands = $state<number[]>(new Array(15).fill(0));
-	let fakeBands = $state<number[]>(new Array(15).fill(0.2));
+	let realBands = $state<number[]>(new Array(barCount).fill(0));
+	let fakeBands = $state<number[]>(new Array(barCount).fill(0.2));
 	let highlightedIndices = $state<number[]>([]);
 
 	const volumeBands = $derived(demo ? fakeBands : realBands);

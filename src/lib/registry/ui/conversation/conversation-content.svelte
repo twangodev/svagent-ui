@@ -22,6 +22,11 @@
 	});
 </script>
 
-<div bind:this={el} data-slot="conversation-content" class={cn("p-4", className)} {...restProps}>
+<div
+	bind:this={el}
+	data-slot="conversation-content"
+	class={cn("flex min-h-full flex-col p-4", className)}
+	{...restProps}
+>
 	{@render children?.()}
 </div>

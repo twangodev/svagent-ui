@@ -32,6 +32,7 @@
 
 	let ref = $state<HTMLSpanElement>();
 	let isInView = $state(false);
+	let hasAnimated = $state(false);
 	let shimmerControls: ReturnType<typeof animate> | undefined;
 	let fadeControls: ReturnType<typeof animate> | undefined;
 
@@ -58,11 +59,10 @@
 	// Shimmer animation
 	$effect(() => {
 		if (!ref || !shouldAnimate) return;
+		hasAnimated = true;
 
-		// Fade in
 		fadeControls = animate(ref, { opacity: [0, 1] }, { duration: 0.3, delay });
 
-		// Shimmer
 		shimmerControls = animate(
 			ref,
 			{ backgroundPosition: ["100% center", "0% center"] },
@@ -97,8 +97,8 @@
 	style:--base-color={color || undefined}
 	style:--shimmer-color={shimmerColor || undefined}
 	style:background-image="var(--shimmer-bg), linear-gradient(var(--base-color), var(--base-color))"
-	style:background-position="100% center"
-	style:opacity="0"
+	style:background-position={hasAnimated ? undefined : "100% center"}
+	style:opacity={hasAnimated ? undefined : "0"}
 >
 	{text}
 </span>

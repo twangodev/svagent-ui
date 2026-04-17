@@ -25,6 +25,8 @@
 	} from "$lib/registry/ui/tooltip/index.js";
 	import { cn } from "$lib/utils.js";
 
+	let { class: className }: { class?: string } = $props();
+
 	type ChatMessage = {
 		role: "user" | "assistant";
 		content: string;
@@ -152,7 +154,7 @@
 	}
 </script>
 
-<Card class={cn("mx-auto flex h-[380px] w-full flex-col gap-0 overflow-hidden")}>
+<Card class={cn("mx-auto flex h-[380px] w-full flex-col gap-0 overflow-hidden", className)}>
 	<CardHeader class="flex shrink-0 flex-row items-center justify-between pb-4">
 		<div class="flex items-center gap-4">
 			<div class="ring-border relative size-10 overflow-hidden rounded-full ring-1">

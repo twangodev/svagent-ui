@@ -73,8 +73,8 @@
 				<MusicPlayer01 />
 			</div>
 		</div>
-		<div class="hidden md:block">
-			<VoiceChat01 />
+		<div class="hidden md:block xl:flex xl:min-h-0 xl:flex-1 xl:flex-col">
+			<VoiceChat01 class="xl:h-full xl:flex-1" />
 		</div>
 		<div class="hidden min-h-0 flex-1 lg:flex lg:flex-col xl:hidden">
 			<ConversationDemo />

@@ -88,4 +88,4 @@ Accumulate the incoming `ConversationMessage` stream into reactive state — han
 - Text input fires `sendContextualUpdate(text)` on every keystroke while the keyboard is open, and `sendMessage(text)` on `Enter` (shift-enter inserts a newline). Adapters that do not implement contextual updates can make `sendContextualUpdate` a no-op.
 - The waveform visualizes the active microphone stream while `connected && !muted`. The mic, keyboard, and end-call buttons are disabled outside the `connected` state.
 - `onDestroy` calls `adapter.disconnect()` if a session is still active, so unmounting the component always releases the underlying resources.
-- `adapter` is required — omitting it will cause a runtime error the first time the user presses the phone button. The demo on this page uses a stub adapter that throws from `connect()` to illustrate the `onError` path.
+- `adapter` is a required prop on `ConversationBarProps`, so TypeScript will flag its omission at compile time. At runtime, pressing the phone button without an adapter would throw from `connect()` — the demo on this page uses a stub adapter that always rejects there to illustrate the `onError` path.

@@ -141,12 +141,12 @@ Drop in `AudioPlayer.Speed` for a dropdown picker, or `AudioPlayer.SpeedButtonGr
 
 ### Error Handling
 
-The root surfaces the `<audio>` element's `MediaError` through `player.error`. Read it from `useAudioPlayer()` to render a fallback when loading fails.
+The root surfaces the `<audio>` element's `MediaError` through `player.error`. Read it from `useAudioPlayer()` inside a child component to render a fallback when loading fails. Like the custom-controls example above, this fragment is meant to be rendered as a descendant of `<AudioPlayer.Root>`.
 
 ```svelte
 <script lang="ts">
-	import { useAudioPlayer } from "$lib/registry/ui/audio-player";
 	import * as AudioPlayer from "$lib/registry/ui/audio-player";
+	import { useAudioPlayer } from "$lib/registry/ui/audio-player";
 
 	const player = useAudioPlayer();
 </script>

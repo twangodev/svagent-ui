@@ -2,7 +2,7 @@
 	import { tv, type VariantProps } from "tailwind-variants";
 
 	export const messageContentVariants = tv({
-		base: "is-user:dark flex flex-col gap-2 overflow-hidden rounded-lg text-sm",
+		base: "flex flex-col gap-2 overflow-hidden rounded-lg text-sm",
 		variants: {
 			variant: {
 				contained: [

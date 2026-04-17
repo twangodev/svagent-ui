@@ -7,7 +7,7 @@
 
 <td
 	class={cn(
-		"px-4 py-2 text-start align-top break-words [&[align=center]]:text-center [&[align=right]]:text-end [&_code]:break-all",
+		"px-4 py-2 text-start [&[align=center]]:text-center [&[align=right]]:text-end",
 		className
 	)}
 	{...restProps}

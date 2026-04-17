@@ -8,6 +8,7 @@
 	import { mainNavItems } from "$lib/navigation.js";
 	import ModeSwitcher from "./mode-switcher.svelte";
 	import CommandMenu from "./command-menu.svelte";
+	import ThemeSelector from "./theme-selector.svelte";
 
 	let mobileNavRef: { closeMenu: () => void } | undefined;
 </script>
@@ -28,6 +29,7 @@
 				<Separator orientation="vertical" class="ms-2 hidden lg:block" />
 				<GithubLink />
 				<Separator orientation="vertical" />
+				<ThemeSelector />
 				<ModeSwitcher />
 			</div>
 		</div>

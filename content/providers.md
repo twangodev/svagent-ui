@@ -134,7 +134,7 @@ An adapter is any object that matches the interface — there is no base class, 
 	import { ConversationBar } from "$lib/registry/ui/conversation-bar";
 	import type { ConversationAdapter } from "$lib/registry/ui/conversation-bar/types";
 
-	let adapter: ConversationAdapter = createAdapter();
+	let adapter: ConversationAdapter = /* your adapter instance */;
 </script>
 
 <ConversationBar {adapter} />

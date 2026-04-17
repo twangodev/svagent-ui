@@ -17,6 +17,13 @@
 	} = $props();
 </script>
 
+<!--
+	Streamdown's root <div> only forwards `class` — it doesn't spread unknown
+	attrs — so we can't pin data-slot on it directly. Wrap in a display:contents
+	host so CSS/automation can target [data-slot="response"] without adding a
+	layout box. (display:contents a11y bugs were fixed across modern browsers
+	in 2022; role/labels on the Streamdown content are unaffected.)
+-->
 <div data-slot="response" class="contents">
 	<Streamdown
 		baseTheme="shadcn"

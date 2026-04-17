@@ -110,9 +110,10 @@ Drop in `AudioPlayer.Speed` for a dropdown picker, or `AudioPlayer.SpeedButtonGr
 
 ### Custom Controls
 
-`useAudioPlayer()` exposes the underlying state and imperative controls. Use it for bespoke UI — custom transport buttons, jump controls, speed presets — while the root still manages the `<audio>` element. This fragment must be rendered as a descendant of `<AudioPlayer.Root>`; `useAudioPlayer()` throws outside that context.
+`useAudioPlayer()` exposes the underlying state and imperative controls. Use it for bespoke UI — custom transport buttons, jump controls, speed presets — while the root still manages the `<audio>` element. `useAudioPlayer()` calls `getContext` at init time, so it must live in a component rendered inside `<AudioPlayer.Root>`.
 
 ```svelte
+<!-- CustomControls.svelte -->
 <script lang="ts">
 	import { useAudioPlayer } from "$lib/registry/ui/audio-player";
 	import { Button } from "$lib/registry/ui/button";
@@ -139,11 +140,23 @@ Drop in `AudioPlayer.Speed` for a dropdown picker, or `AudioPlayer.SpeedButtonGr
 </div>
 ```
 
+```svelte
+<script lang="ts">
+	import * as AudioPlayer from "$lib/registry/ui/audio-player";
+	import CustomControls from "./CustomControls.svelte";
+</script>
+
+<AudioPlayer.Root>
+	<CustomControls />
+</AudioPlayer.Root>
+```
+
 ### Error Handling
 
-The root surfaces the `<audio>` element's `MediaError` through `player.error`. Read it from `useAudioPlayer()` inside a child component to render a fallback when loading fails. Like the custom-controls example above, this fragment is meant to be rendered as a descendant of `<AudioPlayer.Root>`.
+The root surfaces the `<audio>` element's `MediaError` through `player.error`. Read it from `useAudioPlayer()` inside a child component to render a fallback when loading fails. Like the custom-controls example above, the fragment must be rendered inside `<AudioPlayer.Root>` so the hook resolves its context.
 
 ```svelte
+<!-- ErrorBanner.svelte -->
 <script lang="ts">
 	import * as AudioPlayer from "$lib/registry/ui/audio-player";
 	import { useAudioPlayer } from "$lib/registry/ui/audio-player";
@@ -160,6 +173,17 @@ The root surfaces the `<audio>` element's `MediaError` through `player.error`. R
 {:else}
 	<AudioPlayer.Button />
 {/if}
+```
+
+```svelte
+<script lang="ts">
+	import * as AudioPlayer from "$lib/registry/ui/audio-player";
+	import ErrorBanner from "./ErrorBanner.svelte";
+</script>
+
+<AudioPlayer.Root>
+	<ErrorBanner />
+</AudioPlayer.Root>
 ```
 
 ## API Reference

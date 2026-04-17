@@ -132,6 +132,10 @@ export const mainNavItems: NavItem[] = [
 		title: "Components",
 		href: "/docs/components",
 	},
+	{
+		title: "Blocks",
+		href: "/blocks",
+	},
 ];
 
 export function getFullNavItems(): Array<SidebarNavItem & { index: number }> {

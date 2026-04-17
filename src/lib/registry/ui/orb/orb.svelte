@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import type { HTMLAttributes } from "svelte/elements";
-	import type { AgentState } from "./types.js";
+	import type { OrbAgentState } from "./types.js";
 
 	export type OrbProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
 		/**
@@ -20,7 +20,7 @@
 		 * Pass `null` to render the idle state.
 		 * @default null
 		 */
-		agentState?: AgentState;
+		agentState?: OrbAgentState;
 		/**
 		 * `"auto"` uses the active microphone and output audio streams to
 		 * drive reactivity. `"manual"` reads `manualInput` / `manualOutput`

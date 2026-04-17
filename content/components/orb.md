@@ -63,9 +63,9 @@ Drive the orb's visual behavior from an agent lifecycle value. Pass `null` to re
 ```svelte
 <script lang="ts">
 	import { Orb } from "$lib/registry/ui/orb";
-	import type { AgentState } from "$lib/registry/ui/orb";
+	import type { OrbAgentState } from "$lib/registry/ui/orb";
 
-	let agentState: AgentState = $state(null);
+	let agentState: OrbAgentState = $state(null);
 </script>
 
 <Orb {agentState} />

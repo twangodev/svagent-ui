@@ -62,7 +62,10 @@ function docSugar() {
 	const toPascalCase = (/** @type {string} */ name) =>
 		name.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
 
-	const escapePipe = (/** @type {string} */ s) => s.replace(/\|/g, "\\|");
+	// Markdown-table cell escaping. Backslashes must be escaped first — otherwise
+	// a literal `\` before `|` in a prop type or JSDoc description would render
+	// as `\` + an escaped pipe instead of being a single escaped pipe.
+	const escapeCell = (/** @type {string} */ s) => s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|");
 
 	// Markdown tables require one row per line — any literal newline in a cell
 	// value (most commonly in multi-line JSDoc descriptions) would fragment
@@ -103,9 +106,9 @@ function docSugar() {
 		}
 		const rows = entry.props.map((p) => {
 			const propName = `\`${flatten(p.name)}${p.optional ? "?" : ""}\``;
-			const type = `\`${escapePipe(flatten(p.type))}\``;
-			const def = p.default ? `\`${escapePipe(flatten(p.default))}\`` : "—";
-			const desc = p.description ? escapePipe(flatten(p.description)) : "—";
+			const type = `\`${escapeCell(flatten(p.type))}\``;
+			const def = p.default ? `\`${escapeCell(flatten(p.default))}\`` : "—";
+			const desc = p.description ? escapeCell(flatten(p.description)) : "—";
 			return `| ${propName} | ${type} | ${def} | ${desc} |`;
 		});
 		return [

@@ -131,8 +131,7 @@ An adapter is any object that matches the interface — there is no base class, 
 
 ```svelte
 <script lang="ts">
-	import { ConversationBar } from "$lib/registry/ui/conversation-bar";
-	import type { ConversationAdapter } from "$lib/registry/ui/conversation-bar/types";
+	import { ConversationBar, type ConversationAdapter } from "$lib/registry/ui/conversation-bar";
 
 	declare const adapter: ConversationAdapter;
 </script>

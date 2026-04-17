@@ -110,7 +110,7 @@ Drop in `AudioPlayer.Speed` for a dropdown picker, or `AudioPlayer.SpeedButtonGr
 
 ### Custom Controls
 
-`useAudioPlayer()` exposes the underlying state and imperative controls. Use it for bespoke UI — custom transport buttons, jump controls, speed presets — while the root still manages the `<audio>` element.
+`useAudioPlayer()` exposes the underlying state and imperative controls. Use it for bespoke UI — custom transport buttons, jump controls, speed presets — while the root still manages the `<audio>` element. This fragment must be rendered as a descendant of `<AudioPlayer.Root>`; `useAudioPlayer()` throws outside that context.
 
 ```svelte
 <script lang="ts">

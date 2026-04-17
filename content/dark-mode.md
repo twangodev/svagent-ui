@@ -11,14 +11,6 @@ svagent-ui relies on [`mode-watcher`](https://github.com/svecosystem/mode-watche
 npm install mode-watcher
 ```
 
-```bash
-pnpm add mode-watcher
-```
-
-```bash
-bun add mode-watcher
-```
-
 ## Add the watcher
 
 Render `<ModeWatcher />` once near the top of your root layout so the class is applied and persisted before the rest of the tree renders:

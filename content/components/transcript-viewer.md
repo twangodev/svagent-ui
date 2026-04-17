@@ -198,9 +198,60 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 
 ## API Reference
 
-In addition to the root, the registry ships `TranscriptViewerAudio`, `TranscriptViewerWords`, `TranscriptViewerWord`, `TranscriptViewerPlayPauseButton`, and `TranscriptViewerScrubBar` — see [source](https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/transcript-viewer) for their props.
+### `TranscriptViewer` (root)
 
 <ComponentAPI component="transcript-viewer" />
+
+Each row below also accepts the standard `HTMLAttributes` for its host element (e.g. `class`, `style`, `data-*`, event handlers) unless otherwise noted.
+
+### `TranscriptViewerAudio`
+
+Renders the underlying `<audio>` element driven by the root's state. Extends `Omit<HTMLAudioAttributes, "src" | "children">` — `src` comes from the root's `audioSrc`.
+
+| Prop   | Type                       | Default | Description                                             |
+| ------ | -------------------------- | ------- | ------------------------------------------------------- |
+| `ref?` | `HTMLAudioElement \| null` | `null`  | Bindable reference to the underlying `<audio>` element. |
+
+### `TranscriptViewerWords`
+
+Renders the word/gap segments. Extends `HTMLAttributes<HTMLDivElement>`.
+
+| Prop              | Type                                                                      | Default | Description                                                                 |
+| ----------------- | ------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------- |
+| `renderWord?`     | `Snippet<[{ word: TranscriptWord; status: TranscriptViewerWordStatus }]>` | —       | Custom snippet for a single word. Receives the word and its current status. |
+| `renderGap?`      | `Snippet<[{ segment: GapSegment; status: TranscriptViewerWordStatus }]>`  | —       | Custom snippet for inter-word gaps.                                         |
+| `wordClassNames?` | `string`                                                                  | —       | Extra classes applied to each word span.                                    |
+| `gapClassNames?`  | `string`                                                                  | —       | Extra classes applied to each gap span.                                     |
+
+### `TranscriptViewerWord`
+
+The span rendered per word when no custom `renderWord` is supplied. Extends `Omit<HTMLAttributes<HTMLSpanElement>, "children">`.
+
+| Prop        | Type                         | Default | Description                                   |
+| ----------- | ---------------------------- | ------- | --------------------------------------------- |
+| `word`      | `TranscriptWord`             | —       | The word segment to render.                   |
+| `status`    | `TranscriptViewerWordStatus` | —       | One of `"spoken"`, `"current"`, `"unspoken"`. |
+| `children?` | `Snippet`                    | —       | Override the default text with custom markup. |
+
+### `TranscriptViewerPlayPauseButton`
+
+Play/pause toggle wired to the root's `isPlaying` state. Extends `Omit<ButtonProps, "children">`, so it inherits `variant`, `size`, etc. from the button primitive.
+
+| Prop        | Type                                | Default | Description                                                               |
+| ----------- | ----------------------------------- | ------- | ------------------------------------------------------------------------- |
+| `children?` | `Snippet<[{ isPlaying: boolean }]>` | —       | Override the default play/pause icon. Receives the live `isPlaying` flag. |
+
+### `TranscriptViewerScrubBar`
+
+Time-aware scrub bar composed over the standalone `ScrubBar` primitive. Extends `Omit<HTMLAttributes<HTMLDivElement>, "children">`.
+
+| Prop                 | Type      | Default | Description                                       |
+| -------------------- | --------- | ------- | ------------------------------------------------- |
+| `showTimeLabels?`    | `boolean` | `true`  | Render the leading/trailing time labels.          |
+| `labelsClassName?`   | `string`  | —       | Classes forwarded to the time-label row.          |
+| `trackClassName?`    | `string`  | —       | Classes forwarded to the inner `ScrubBarTrack`.   |
+| `progressClassName?` | `string`  | —       | Classes forwarded to the `ScrubBarProgress` fill. |
+| `thumbClassName?`    | `string`  | —       | Classes forwarded to the `ScrubBarThumb`.         |
 
 ## Notes
 

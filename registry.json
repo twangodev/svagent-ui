@@ -624,6 +624,49 @@
 			]
 		},
 		{
+			"name": "voice-chat-02",
+			"type": "registry:block",
+			"title": "Voice Chat 02",
+			"description": "A compact voice-chat card with an animated orb, connection status, and call toggle.",
+			"registryDependencies": ["button", "card", "orb", "shimmering-text"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/voice-chat-02/voice-chat-02.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-02/voice-chat-02.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-chat-02/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-02/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-form-01",
+			"type": "registry:block",
+			"title": "Voice Form 01",
+			"description": "A form with a voice-fill button that cycles through idle/recording/processing/success states.",
+			"registryDependencies": ["card", "input", "label", "voice-button"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/voice-form-01.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/voice-form-01.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/schema.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/schema.ts"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/index.ts"
+				}
+			]
+		},
+		{
 			"name": "music-player-01",
 			"type": "registry:block",
 			"title": "Music Player 01",

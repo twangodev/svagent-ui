@@ -72,6 +72,23 @@ function docSugar() {
 	// the row. Collapse all whitespace runs to a single space.
 	const flatten = (/** @type {string} */ s) => s.replace(/\s+/g, " ").trim();
 
+	// JSDoc description cells are NOT wrapped in backticks — they render as
+	// prose. If the prose contains `<`, `>`, `{`, or `}`, mdsx will parse them
+	// as component tags or Svelte expressions and either crash the build or
+	// mount live elements in the API table. Escape to HTML entities before
+	// emitting.
+	const escapeMdx = (/** @type {string} */ s) =>
+		s.replace(
+			/[<>{}]/g,
+			(c) =>
+				/** @type {Record<string, string>} */ ({
+					"<": "&lt;",
+					">": "&gt;",
+					"{": "&#123;",
+					"}": "&#125;",
+				})[c]
+		);
+
 	const expandInstall = (/** @type {string} */ name) =>
 		[
 			"```bash",
@@ -108,7 +125,7 @@ function docSugar() {
 			const propName = `\`${flatten(p.name)}${p.optional ? "?" : ""}\``;
 			const type = `\`${escapeCell(flatten(p.type))}\``;
 			const def = p.default ? `\`${escapeCell(flatten(p.default))}\`` : "—";
-			const desc = p.description ? escapeCell(flatten(p.description)) : "—";
+			const desc = p.description ? escapeMdx(escapeCell(flatten(p.description))) : "—";
 			return `| ${propName} | ${type} | ${def} | ${desc} |`;
 		});
 		return [
@@ -117,6 +134,36 @@ function docSugar() {
 			...rows,
 		].join("\n");
 	};
+
+	// Precompute [start, end) ranges for fenced code blocks and inline code
+	// spans so we can skip sugar tags that appear inside them. Without this,
+	// a doc page demonstrating the sugar itself (e.g. showing a literal
+	// `<Install component="x" />` inside a ```md fence) would have its example
+	// corrupted by expansion.
+	const FENCE_REGEX = /^(`{3,}|~{3,})[^\n]*\n[\s\S]*?\n\1[ \t]*$/gm;
+	const INLINE_REGEX = /`+[^`\n]+`+/g;
+	/**
+	 * @param {string} source
+	 * @returns {Array<[number, number]>}
+	 */
+	const codeRanges = (source) => {
+		/** @type {Array<[number, number]>} */
+		const ranges = [];
+		for (const m of source.matchAll(FENCE_REGEX)) {
+			if (m.index === undefined) continue;
+			ranges.push([m.index, m.index + m[0].length]);
+		}
+		for (const m of source.matchAll(INLINE_REGEX)) {
+			if (m.index === undefined) continue;
+			ranges.push([m.index, m.index + m[0].length]);
+		}
+		return ranges;
+	};
+	/**
+	 * @param {Array<[number, number]>} ranges
+	 * @param {number} index
+	 */
+	const inCode = (ranges, index) => ranges.some(([s, e]) => index >= s && index < e);
 
 	return {
 		name: "doc-sugar",
@@ -128,19 +175,20 @@ function docSugar() {
 			if (!hasInstall && !hasUsage && !hasApi) return;
 
 			const ms = new MagicString(content);
+			const ranges = codeRanges(content);
 
 			for (const match of content.matchAll(INSTALL_REGEX)) {
-				if (match.index === undefined) continue;
+				if (match.index === undefined || inCode(ranges, match.index)) continue;
 				ms.overwrite(match.index, match.index + match[0].length, expandInstall(match[1]));
 			}
 
 			for (const match of content.matchAll(USAGE_REGEX)) {
-				if (match.index === undefined) continue;
+				if (match.index === undefined || inCode(ranges, match.index)) continue;
 				ms.overwrite(match.index, match.index + match[0].length, expandUsage(match[1]));
 			}
 
 			for (const match of content.matchAll(API_REGEX)) {
-				if (match.index === undefined) continue;
+				if (match.index === undefined || inCode(ranges, match.index)) continue;
 				ms.overwrite(match.index, match.index + match[0].length, expandComponentAPI(match[1]));
 			}
 

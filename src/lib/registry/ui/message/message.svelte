@@ -25,3 +25,14 @@
 >
 	{@render children?.()}
 </div>
+
+<style>
+	:global(.is-user) {
+		--foreground: var(--primary-foreground);
+		--card: var(--primary);
+		--card-foreground: var(--primary-foreground);
+		--muted: color-mix(in oklab, var(--primary) 88%, var(--primary-foreground));
+		--muted-foreground: color-mix(in oklab, var(--primary-foreground) 70%, transparent);
+		--border: color-mix(in oklab, var(--primary-foreground) 18%, transparent);
+	}
+</style>

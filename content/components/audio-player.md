@@ -33,7 +33,7 @@ links:
 
 ## Examples
 
-### Playing a Specific Track
+### Basic Usage
 
 Pass an `AudioPlayerItem` to `AudioPlayer.Button` via the `item` prop. Activating the button loads and plays that track; the root swaps `src` automatically.
 

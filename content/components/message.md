@@ -18,24 +18,24 @@ links:
 
 ## Examples
 
-### Basic Message
+### Basic Usage
 
 Compose `Message` with `MessageAvatar` and `MessageContent`. The `from` prop drives alignment and which group-scoped styles apply to descendants.
 
 ```svelte
 <script lang="ts">
-	import { Message, MessageAvatar, MessageContent } from "$lib/registry/ui/message";
+	import * as Message from "$lib/registry/ui/message";
 </script>
 
-<Message from="user">
-	<MessageAvatar src="/user-avatar.jpg" name="John" />
-	<MessageContent>Hello, how can I help you?</MessageContent>
-</Message>
+<Message.Root from="user">
+	<Message.Avatar src="/user-avatar.jpg" name="John" />
+	<Message.Content>Hello, how can I help you?</Message.Content>
+</Message.Root>
 
-<Message from="assistant">
-	<MessageAvatar src="/assistant-avatar.jpg" name="AI" />
-	<MessageContent>I'm here to assist you with any questions!</MessageContent>
-</Message>
+<Message.Root from="assistant">
+	<Message.Avatar src="/assistant-avatar.jpg" name="AI" />
+	<Message.Content>I'm here to assist you with any questions!</Message.Content>
+</Message.Root>
 ```
 
 ### Message Variants
@@ -44,18 +44,18 @@ Compose `Message` with `MessageAvatar` and `MessageContent`. The `from` prop dri
 
 ```svelte
 <script lang="ts">
-	import { Message, MessageAvatar, MessageContent } from "$lib/registry/ui/message";
+	import * as Message from "$lib/registry/ui/message";
 </script>
 
-<Message from="user">
-	<MessageAvatar src="/user-avatar.jpg" />
-	<MessageContent variant="contained">This is a contained message with background</MessageContent>
-</Message>
+<Message.Root from="user">
+	<Message.Avatar src="/user-avatar.jpg" />
+	<Message.Content variant="contained">This is a contained message with background</Message.Content>
+</Message.Root>
 
-<Message from="assistant">
-	<MessageAvatar src="/assistant-avatar.jpg" />
-	<MessageContent variant="flat">This is a flat message with minimal styling</MessageContent>
-</Message>
+<Message.Root from="assistant">
+	<Message.Avatar src="/assistant-avatar.jpg" />
+	<Message.Content variant="flat">This is a flat message with minimal styling</Message.Content>
+</Message.Root>
 ```
 
 ### In a Conversation
@@ -65,7 +65,7 @@ Compose `Message` with `MessageAvatar` and `MessageContent`. The `from` prop dri
 ```svelte
 <script lang="ts">
 	import * as Conversation from "$lib/registry/ui/conversation";
-	import { Message, MessageAvatar, MessageContent } from "$lib/registry/ui/message";
+	import * as Message from "$lib/registry/ui/message";
 
 	type Turn = {
 		id: string;
@@ -81,10 +81,10 @@ Compose `Message` with `MessageAvatar` and `MessageContent`. The `from` prop dri
 <Conversation.Root>
 	<Conversation.Content>
 		{#each messages as message (message.id)}
-			<Message from={message.from}>
-				<MessageAvatar src={message.avatarUrl} name={message.name} />
-				<MessageContent>{message.content}</MessageContent>
-			</Message>
+			<Message.Root from={message.from}>
+				<Message.Avatar src={message.avatarUrl} name={message.name} />
+				<Message.Content>{message.content}</Message.Content>
+			</Message.Root>
 		{/each}
 	</Conversation.Content>
 </Conversation.Root>

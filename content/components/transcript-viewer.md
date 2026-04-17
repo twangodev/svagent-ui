@@ -18,13 +18,7 @@ links:
 
 ```svelte
 <script lang="ts">
-	import {
-		TranscriptViewer,
-		TranscriptViewerAudio,
-		TranscriptViewerWords,
-		TranscriptViewerPlayPauseButton,
-		TranscriptViewerScrubBar,
-	} from "$lib/registry/ui/transcript-viewer";
+	import * as TranscriptViewer from "$lib/registry/ui/transcript-viewer";
 	import type { CharacterAlignment } from "$lib/registry/ui/transcript-viewer";
 
 	let {
@@ -36,14 +30,14 @@ links:
 	} = $props();
 </script>
 
-<TranscriptViewer {audioSrc} {alignment}>
-	<TranscriptViewerAudio />
-	<TranscriptViewerWords />
+<TranscriptViewer.Root {audioSrc} {alignment}>
+	<TranscriptViewer.Audio />
+	<TranscriptViewer.Words />
 	<div class="flex items-center gap-3">
-		<TranscriptViewerPlayPauseButton />
-		<TranscriptViewerScrubBar />
+		<TranscriptViewer.PlayPauseButton />
+		<TranscriptViewer.ScrubBar />
 	</div>
-</TranscriptViewer>
+</TranscriptViewer.Root>
 ```
 
 ## Examples
@@ -53,11 +47,11 @@ links:
 Pass `audioType` when the source is not MP3 so the browser picks the right decoder.
 
 ```svelte
-<TranscriptViewer {audioSrc} {alignment} audioType="audio/wav">
-	<TranscriptViewerAudio />
-	<TranscriptViewerWords />
-	<TranscriptViewerScrubBar />
-</TranscriptViewer>
+<TranscriptViewer.Root {audioSrc} {alignment} audioType="audio/wav">
+	<TranscriptViewer.Audio />
+	<TranscriptViewer.Words />
+	<TranscriptViewer.ScrubBar />
+</TranscriptViewer.Root>
 ```
 
 ### Custom Word and Gap Rendering
@@ -66,12 +60,7 @@ Pass `audioType` when the source is not MP3 so the browser picks the right decod
 
 ```svelte
 <script lang="ts">
-	import {
-		TranscriptViewer,
-		TranscriptViewerAudio,
-		TranscriptViewerWords,
-		TranscriptViewerScrubBar,
-	} from "$lib/registry/ui/transcript-viewer";
+	import * as TranscriptViewer from "$lib/registry/ui/transcript-viewer";
 	import type { CharacterAlignment } from "$lib/registry/ui/transcript-viewer";
 
 	let {
@@ -83,9 +72,9 @@ Pass `audioType` when the source is not MP3 so the browser picks the right decod
 	} = $props();
 </script>
 
-<TranscriptViewer {audioSrc} {alignment}>
-	<TranscriptViewerAudio />
-	<TranscriptViewerWords>
+<TranscriptViewer.Root {audioSrc} {alignment}>
+	<TranscriptViewer.Audio />
+	<TranscriptViewer.Words>
 		{#snippet renderWord({ word, status })}
 			<span
 				class:font-semibold={status === "current"}
@@ -95,9 +84,9 @@ Pass `audioType` when the source is not MP3 so the browser picks the right decod
 				{word.text}
 			</span>
 		{/snippet}
-	</TranscriptViewerWords>
-	<TranscriptViewerScrubBar />
-</TranscriptViewer>
+	</TranscriptViewer.Words>
+	<TranscriptViewer.ScrubBar />
+</TranscriptViewer.Root>
 ```
 
 ### Playback Callbacks
@@ -106,12 +95,7 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 
 ```svelte
 <script lang="ts">
-	import {
-		TranscriptViewer,
-		TranscriptViewerAudio,
-		TranscriptViewerWords,
-		TranscriptViewerScrubBar,
-	} from "$lib/registry/ui/transcript-viewer";
+	import * as TranscriptViewer from "$lib/registry/ui/transcript-viewer";
 	import type { CharacterAlignment } from "$lib/registry/ui/transcript-viewer";
 
 	let {
@@ -125,7 +109,7 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 	let currentTime = $state(0);
 </script>
 
-<TranscriptViewer
+<TranscriptViewer.Root
 	{audioSrc}
 	{alignment}
 	onPlay={() => console.log("Playing")}
@@ -133,10 +117,10 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 	onTimeUpdate={(t) => (currentTime = t)}
 	onEnded={() => console.log("Ended")}
 >
-	<TranscriptViewerAudio />
-	<TranscriptViewerWords />
-	<TranscriptViewerScrubBar />
-</TranscriptViewer>
+	<TranscriptViewer.Audio />
+	<TranscriptViewer.Words />
+	<TranscriptViewer.ScrubBar />
+</TranscriptViewer.Root>
 ```
 
 ### Custom Play/Pause Button
@@ -147,12 +131,7 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 <script lang="ts">
 	import PauseIcon from "@lucide/svelte/icons/pause";
 	import PlayIcon from "@lucide/svelte/icons/play";
-	import {
-		TranscriptViewer,
-		TranscriptViewerAudio,
-		TranscriptViewerPlayPauseButton,
-		TranscriptViewerWords,
-	} from "$lib/registry/ui/transcript-viewer";
+	import * as TranscriptViewer from "$lib/registry/ui/transcript-viewer";
 	import type { CharacterAlignment } from "$lib/registry/ui/transcript-viewer";
 
 	let {
@@ -164,10 +143,10 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 	} = $props();
 </script>
 
-<TranscriptViewer {audioSrc} {alignment}>
-	<TranscriptViewerAudio />
-	<TranscriptViewerWords />
-	<TranscriptViewerPlayPauseButton>
+<TranscriptViewer.Root {audioSrc} {alignment}>
+	<TranscriptViewer.Audio />
+	<TranscriptViewer.Words />
+	<TranscriptViewer.PlayPauseButton>
 		{#snippet children({ isPlaying })}
 			{#if isPlaying}
 				<PauseIcon class="size-4" /> Pause
@@ -175,8 +154,8 @@ The root forwards the underlying `<audio>` lifecycle via `onPlay`, `onPause`, `o
 				<PlayIcon class="size-4" /> Play
 			{/if}
 		{/snippet}
-	</TranscriptViewerPlayPauseButton>
-</TranscriptViewer>
+	</TranscriptViewer.PlayPauseButton>
+</TranscriptViewer.Root>
 ```
 
 ### Accessing Viewer State

@@ -132,7 +132,7 @@ Chain state transitions from `onPress` to model a full record → process → su
 ## Notes
 
 - Built on top of the shadcn-svelte `Button` primitive, so every button `variant` and `size` — including `"icon"` — works as expected.
-- The integrated [LiveWaveform](/docs/components/live-waveform) samples the active microphone stream directly while `state` is `"recording"` or `"processing"`.
+- The integrated [`LiveWaveform`](/docs/components/live-waveform) samples the active microphone stream directly while `state` is `"recording"` or `"processing"`.
 - `success` and `error` auto-clear after `feedbackDuration` (default `1500`ms); drive `state` back to `"idle"` from your side on the same cadence if you want the button fully reset.
 - While `state="processing"`, the button is rendered disabled regardless of the `disabled` prop.
 - `onPress` fires after any `onclick` handler you pass — both are invoked.

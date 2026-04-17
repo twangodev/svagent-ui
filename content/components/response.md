@@ -80,18 +80,18 @@ Compose inside a `Message` to render streaming assistant output next to an avata
 
 ```svelte
 <script lang="ts">
-	import { Message, MessageAvatar, MessageContent } from "$lib/registry/ui/message";
+	import * as Message from "$lib/registry/ui/message";
 	import { Response } from "$lib/registry/ui/response";
 
 	let { streamingResponse }: { streamingResponse: string } = $props();
 </script>
 
-<Message from="assistant">
-	<MessageAvatar src="/ai-avatar.jpg" name="AI" />
-	<MessageContent>
+<Message.Root from="assistant">
+	<Message.Avatar src="/ai-avatar.jpg" name="AI" />
+	<Message.Content>
 		<Response content={streamingResponse} />
-	</MessageContent>
-</Message>
+	</Message.Content>
+</Message.Root>
 ```
 
 ## API Reference

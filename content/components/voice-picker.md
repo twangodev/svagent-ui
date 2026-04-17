@@ -127,8 +127,8 @@ Map any provider's voice shape into the `Voice` interface once, then hand the ar
 
 ## Notes
 
-- Built on the shadcn-svelte `Command` and `Popover` primitives plus svagent's [AudioPlayer](/docs/components/audio-player) — search, keyboard nav, and shared playback state come from those components.
-- Each row renders an [Orb](/docs/components/orb); the selected voice also shows one on the trigger.
+- Built on the shadcn-svelte `Command` and `Popover` primitives plus svagent's [`AudioPlayer`](/docs/components/audio-player) — search, keyboard nav, and shared playback state come from those components.
+- Each row renders an [`Orb`](/docs/components/orb); the selected voice also shows one on the trigger (hardcoded to the `"thinking"` state, purely decorative).
 - Preview playback is driven by `AudioPlayer`, so only one voice plays at a time across the picker.
 - Voices without a `previewUrl` still render, but the hover play/pause overlay is suppressed.
 - Search filtering draws on each voice's `name` plus the common `labels` keys (`accent`, `gender`, `age`, `description`, `use case`).

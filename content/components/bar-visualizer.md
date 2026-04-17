@@ -18,7 +18,7 @@ links:
 
 ## Examples
 
-### Basic Visualizer
+### Basic Usage
 
 Pipe a live `MediaStream` into the visualizer. The FFT slice is analysed on every frame and mapped onto `barCount` bars.
 

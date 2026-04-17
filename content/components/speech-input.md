@@ -26,26 +26,21 @@ Compose `SpeechInput` with the record button, preview, and cancel button. Pass a
 
 ```svelte
 <script lang="ts">
-	import {
-		SpeechInput,
-		SpeechInputRecordButton,
-		SpeechInputPreview,
-		SpeechInputCancelButton,
-	} from "$lib/registry/ui/speech-input";
+	import * as SpeechInput from "$lib/registry/ui/speech-input";
 	import type { TranscriptionAdapter } from "$lib/registry/ui/speech-input";
 
 	const adapter: TranscriptionAdapter = createMyAdapter(/* ... */);
 </script>
 
-<SpeechInput
+<SpeechInput.Root
 	{adapter}
 	onChange={(data) => console.log(data.transcript)}
 	onStop={(data) => console.log("Final:", data.transcript)}
 >
-	<SpeechInputRecordButton />
-	<SpeechInputPreview placeholder="Start speaking..." />
-	<SpeechInputCancelButton />
-</SpeechInput>
+	<SpeechInput.RecordButton />
+	<SpeechInput.Preview placeholder="Start speaking..." />
+	<SpeechInput.CancelButton />
+</SpeechInput.Root>
 ```
 
 ### With Form Input
@@ -54,12 +49,7 @@ Use `onStop` to append the committed transcript onto an external text field.
 
 ```svelte
 <script lang="ts">
-	import {
-		SpeechInput,
-		SpeechInputRecordButton,
-		SpeechInputPreview,
-		SpeechInputCancelButton,
-	} from "$lib/registry/ui/speech-input";
+	import * as SpeechInput from "$lib/registry/ui/speech-input";
 	import type { TranscriptionAdapter } from "$lib/registry/ui/speech-input";
 
 	const adapter: TranscriptionAdapter = createMyAdapter(/* ... */);
@@ -68,11 +58,11 @@ Use `onStop` to append the committed transcript onto an external text field.
 
 <div class="flex items-center gap-2">
 	<input bind:value class="flex-1 rounded border px-3 py-2" />
-	<SpeechInput {adapter} onStop={(data) => (value = `${value} ${data.transcript}`.trim())}>
-		<SpeechInputRecordButton />
-		<SpeechInputPreview />
-		<SpeechInputCancelButton />
-	</SpeechInput>
+	<SpeechInput.Root {adapter} onStop={(data) => (value = `${value} ${data.transcript}`.trim())}>
+		<SpeechInput.RecordButton />
+		<SpeechInput.Preview />
+		<SpeechInput.CancelButton />
+	</SpeechInput.Root>
 </div>
 ```
 
@@ -81,11 +71,11 @@ Use `onStop` to append the committed transcript onto an external text field.
 Child order is the layout order — put the cancel button first if you want it to lead.
 
 ```svelte
-<SpeechInput {adapter}>
-	<SpeechInputCancelButton />
-	<SpeechInputPreview />
-	<SpeechInputRecordButton />
-</SpeechInput>
+<SpeechInput.Root {adapter}>
+	<SpeechInput.CancelButton />
+	<SpeechInput.Preview />
+	<SpeechInput.RecordButton />
+</SpeechInput.Root>
 ```
 
 ### Minimal (Record Button Only)
@@ -93,9 +83,9 @@ Child order is the layout order — put the cancel button first if you want it t
 Drop the preview and cancel slots for an icon-only recorder; the transcript is still delivered via `onStop`.
 
 ```svelte
-<SpeechInput {adapter} onStop={(data) => console.log(data.transcript)}>
-	<SpeechInputRecordButton />
-</SpeechInput>
+<SpeechInput.Root {adapter} onStop={(data) => console.log(data.transcript)}>
+	<SpeechInput.RecordButton />
+</SpeechInput.Root>
 ```
 
 ### Custom Placeholder
@@ -103,11 +93,11 @@ Drop the preview and cancel slots for an icon-only recorder; the transcript is s
 `SpeechInputPreview` shows its `placeholder` text until the first partial transcript arrives.
 
 ```svelte
-<SpeechInput {adapter}>
-	<SpeechInputRecordButton />
-	<SpeechInputPreview placeholder="Say something..." />
-	<SpeechInputCancelButton />
-</SpeechInput>
+<SpeechInput.Root {adapter}>
+	<SpeechInput.RecordButton />
+	<SpeechInput.Preview placeholder="Say something..." />
+	<SpeechInput.CancelButton />
+</SpeechInput.Root>
 ```
 
 ### Using the Hook

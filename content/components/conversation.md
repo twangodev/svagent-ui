@@ -18,7 +18,7 @@ links:
 
 ## Examples
 
-### Basic Conversation
+### Basic Usage
 
 Wrap your message list in `Conversation.Root` and `Conversation.Content`. Include `Conversation.ScrollButton` to give users a way back to the latest turn after they scroll up.
 

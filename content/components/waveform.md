@@ -18,7 +18,7 @@ links:
 
 ## Examples
 
-### Basic Waveform
+### Basic Usage
 
 Pass an array of values in `[0, 1]` to render a static bar chart.
 

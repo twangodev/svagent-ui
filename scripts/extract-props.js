@@ -175,11 +175,24 @@ function resolvePropsTypeNode(moduleSource, instanceSource, componentName) {
 	const byExactName = findTypeAlias(files, expected);
 	if (byExactName) return byExactName;
 
-	// Strategy 2: any `*Props` alias as a fallback.
+	// Strategy 2: any `*Props` alias as a fallback. Ambiguity (e.g. a future
+	// compound component declaring TabsProps alongside TabsListProps in the
+	// same module) is a hard failure — silently picking the first match would
+	// publish the wrong type in the generated docs.
+	/** @type {import("ts-morph").TypeAliasDeclaration[]} */
+	const propsAliases = [];
 	for (const file of files) {
 		for (const alias of file.getTypeAliases()) {
-			if (alias.getName().endsWith("Props")) return alias.getTypeNode();
+			if (alias.getName().endsWith("Props")) propsAliases.push(alias);
 		}
+	}
+	if (propsAliases.length === 1) return propsAliases[0].getTypeNode();
+	if (propsAliases.length > 1) {
+		const names = propsAliases.map((a) => a.getName()).join(", ");
+		throw new Error(
+			`[extract-props] ${componentName}: ambiguous *Props aliases (${names}). ` +
+				`Rename the root props type to '${expected}' so Strategy 1 resolves it unambiguously.`
+		);
 	}
 
 	// Strategy 3: inline annotation on the instance block's $props() call.

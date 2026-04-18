@@ -1,4 +1,4 @@
-# svagent-ui
+# sv11-ui
 
 SvelteKit 2 + Svelte 5 component registry for building AI agent interfaces. Includes voice/audio, chat, transcription, and visualization components. Provider-agnostic — users wire up their own backend (ElevenLabs, OpenAI, Deepgram, custom, etc.).
 

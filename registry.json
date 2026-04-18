@@ -1,7 +1,7 @@
 {
 	"$schema": "https://shadcn-svelte.com/schema/registry.json",
-	"name": "svagent",
-	"homepage": "https://svagent.ui.twango.dev",
+	"name": "sv11",
+	"homepage": "https://sv11.ui.twango.dev",
 	"items": [
 		{
 			"name": "audio-player",
@@ -596,6 +596,160 @@
 					"path": "src/lib/registry/ui/waveform/index.ts",
 					"type": "registry:ui",
 					"target": "lib/components/ui/waveform/index.ts"
+				}
+			]
+		},
+		{
+			"name": "music-player-02",
+			"type": "registry:block",
+			"title": "Music Player 02",
+			"description": "A minimal single-track music player with play/pause, progress, time, and duration.",
+			"registryDependencies": ["audio-player", "card"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/music-player-02/music-player-02.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-02/music-player-02.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/music-player-02/music-player-02-demo.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-02/music-player-02-demo.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/music-player-02/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-02/index.ts"
+				}
+			]
+		},
+		{
+			"name": "speaker-01",
+			"type": "registry:block",
+			"title": "Speaker 01",
+			"description": "A speaker-style music player with two audio-reactive Orbs, waveform strip, transport controls, and a volume slider.",
+			"registryDependencies": ["audio-player", "button", "card", "orb", "waveform"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/speaker-01/speaker-01.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/speaker-01/speaker-01.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/speaker-01/speaker-inner.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/speaker-01/speaker-inner.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/speaker-01/speaker-orb.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/speaker-01/speaker-orb.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/speaker-01/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/speaker-01/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-chat-01",
+			"type": "registry:block",
+			"title": "Voice Chat 01",
+			"description": "A full voice-and-text chat card: Orb header, scrollable conversation with copy actions, and a composer with send + call toggle.",
+			"registryDependencies": [
+				"button",
+				"card",
+				"conversation",
+				"input",
+				"message",
+				"orb",
+				"response",
+				"shimmering-text",
+				"tooltip"
+			],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/voice-chat-01/voice-chat-01.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-01/voice-chat-01.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-chat-01/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-01/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-chat-02",
+			"type": "registry:block",
+			"title": "Voice Chat 02",
+			"description": "A compact voice-chat card with an animated orb, connection status, and call toggle.",
+			"registryDependencies": ["button", "card", "orb", "shimmering-text"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/voice-chat-02/voice-chat-02.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-02/voice-chat-02.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-chat-02/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-chat-02/index.ts"
+				}
+			]
+		},
+		{
+			"name": "voice-form-01",
+			"type": "registry:block",
+			"title": "Voice Form 01",
+			"description": "A form with a voice-fill button that cycles through idle/recording/processing/success states.",
+			"registryDependencies": ["card", "input", "label", "voice-button"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/voice-form-01.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/voice-form-01.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/schema.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/schema.ts"
+				},
+				{
+					"path": "src/lib/registry/blocks/voice-form-01/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/voice-form-01/index.ts"
+				}
+			]
+		},
+		{
+			"name": "music-player-01",
+			"type": "registry:block",
+			"title": "Music Player 01",
+			"description": "A music player with a scrollable song list and play/pause, progress, time, and duration controls.",
+			"registryDependencies": ["audio-player", "button", "card", "scroll-area"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/music-player-01/music-player-01.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-01/music-player-01.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/music-player-01/music-player-01-player.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-01/music-player-01-player.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/music-player-01/music-player-01-song.svelte",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-01/music-player-01-song.svelte"
+				},
+				{
+					"path": "src/lib/registry/blocks/music-player-01/index.ts",
+					"type": "registry:block",
+					"target": "components/blocks/music-player-01/index.ts"
 				}
 			]
 		}

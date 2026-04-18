@@ -59,7 +59,7 @@
 	});
 
 	// Load perlin texture with tiling enabled (upstream line 101-103 + line 234-235)
-	const texture = useTexture("https://svagent.ui.twango.dev/orbs/perlin-noise.png", {
+	const texture = useTexture("https://sv11.ui.twango.dev/orbs/perlin-noise.png", {
 		transform: (t) => {
 			t.wrapS = THREE.RepeatWrapping;
 			t.wrapT = THREE.RepeatWrapping;

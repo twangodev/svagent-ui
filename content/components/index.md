@@ -1,6 +1,6 @@
 ---
 title: Components
-description: Browse the available components in svagent-ui.
+description: Browse the available components in sv11-ui.
 ---
 
 # Components

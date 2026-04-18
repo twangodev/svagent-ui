@@ -3,7 +3,7 @@ title: Voice Picker
 description: A searchable voice selector with audio preview and Orb visualization. Provider-agnostic — pass any voices matching the Voice interface from ElevenLabs, OpenAI, Cartesia, or a custom backend.
 component: true
 links:
-  source: https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/voice-picker
+  source: https://github.com/twangodev/sv11-ui/tree/main/src/lib/registry/ui/voice-picker
 ---
 
 <ComponentPreview name="voice-picker-demo" />
@@ -127,7 +127,7 @@ Map any provider's voice shape into the `Voice` interface once, then hand the ar
 
 ## Notes
 
-- Built on the shadcn-svelte `Command` and `Popover` primitives plus svagent's [`AudioPlayer`](/docs/components/audio-player) — search, keyboard nav, and shared playback state come from those components.
+- Built on the shadcn-svelte `Command` and `Popover` primitives plus sv11's [`AudioPlayer`](/docs/components/audio-player) — search, keyboard nav, and shared playback state come from those components.
 - Each row renders an [`Orb`](/docs/components/orb); the selected voice also shows one on the trigger (hardcoded to the `"thinking"` state, purely decorative).
 - Preview playback is driven by `AudioPlayer`, so only one voice plays at a time across the picker.
 - Voices without a `previewUrl` still render, but the hover play/pause overlay is suppressed.

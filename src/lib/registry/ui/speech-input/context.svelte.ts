@@ -18,7 +18,7 @@ export interface SpeechInputCallbacks {
 	onError?: (error: Error) => void;
 }
 
-const SPEECH_INPUT_CONTEXT_KEY = Symbol("svagent-speech-input");
+const SPEECH_INPUT_CONTEXT_KEY = Symbol("sv11-speech-input");
 
 export class SpeechInputState {
 	// Reactive state — written by methods, read by sub-components via context.

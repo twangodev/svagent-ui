@@ -49,6 +49,8 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Install ffmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
       - name: Build site
         run: pnpm build
       - name: Upload Pages artifact

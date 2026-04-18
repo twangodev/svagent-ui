@@ -34,7 +34,12 @@ export function shadcnRegistryPlugin(): Plugin {
 		// `static/` into the build output.
 		enforce: "pre",
 		async buildStart() {
-			pending ??= runCli();
+			// Clear `pending` on rejection so a failed CLI run doesn't poison
+			// every subsequent rebuild in `vite dev` watch mode.
+			pending ??= runCli().catch((err) => {
+				pending = null;
+				throw err;
+			});
 			await pending;
 		},
 	};

@@ -16,6 +16,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizePath, type Plugin } from "vite";
 
+const FFMPEG_INSTALL_HINT =
+	"ffmpeg not found on PATH — install it (macOS: `brew install ffmpeg`, " +
+	"Ubuntu: `apt install ffmpeg`) or drop precomputed JSONs into static/audio/waveforms/.";
+
 import {
 	DEFAULT_BARS_PER_SECOND,
 	sampleWaveform,
@@ -58,7 +62,13 @@ function decodeToFloat32(inputPath: string): Promise<Float32Array> {
 		ff.stderr.on("data", (chunk) => {
 			stderr += chunk.toString();
 		});
-		ff.on("error", reject);
+		ff.on("error", (err) => {
+			if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+				reject(new Error(FFMPEG_INSTALL_HINT));
+				return;
+			}
+			reject(err);
+		});
 		ff.on("close", (code) => {
 			if (code !== 0) {
 				reject(new Error(`ffmpeg exited ${code} for ${inputPath}\n${stderr}`));
@@ -81,6 +91,13 @@ async function mtimeOrZero(filePath: string): Promise<number> {
 }
 
 async function generateAll(): Promise<{ generated: number; skipped: number }> {
+	// On clean forks without audio assets, static/audio/ may not exist. Don't
+	// fail the whole build — just no-op.
+	try {
+		await stat(INPUT_DIR);
+	} catch {
+		return { generated: 0, skipped: 0 };
+	}
 	await mkdir(OUTPUT_DIR, { recursive: true });
 
 	const entries = await readdir(INPUT_DIR, { withFileTypes: true });
@@ -142,12 +159,33 @@ export function waveformsPlugin(): Plugin {
 		},
 		configureServer(server) {
 			const inputDir = normalizePath(INPUT_DIR);
-			const handle = async (changedPath: string) => {
+			const outputDir = normalizePath(OUTPUT_DIR);
+			// Coalesce rapid add+change storms (editors often emit both) so
+			// generateAll() doesn't interleave writeFile()s for the same path.
+			let running: Promise<void> | null = null;
+			let pendingRerun = false;
+			const handle = (changedPath: string) => {
 				const p = normalizePath(changedPath);
-				if (path.dirname(p) !== inputDir) return; // only direct children, skip waveforms/ subdir
+				// `normalizePath` always returns POSIX separators, so compare with
+				// `path.posix.dirname` for correctness on Windows too. Also skip
+				// the waveforms/ subdir explicitly to avoid reacting to our own
+				// output writes.
+				if (path.posix.dirname(p) !== inputDir) return;
+				if (p.startsWith(outputDir + "/")) return;
 				if (!AUDIO_EXTENSIONS.has(path.extname(p).toLowerCase())) return;
-				await generateAll();
-				server.ws.send({ type: "full-reload" });
+				if (running) {
+					pendingRerun = true;
+					return;
+				}
+				running = (async () => {
+					do {
+						pendingRerun = false;
+						await generateAll();
+						server.ws.send({ type: "full-reload" });
+					} while (pendingRerun);
+				})().finally(() => {
+					running = null;
+				});
 			};
 			server.watcher.on("add", handle);
 			server.watcher.on("change", handle);

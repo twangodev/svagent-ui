@@ -6,6 +6,7 @@ import { normalizePath, type Plugin } from "vite";
 const CONTENT_DIR = normalizePath(
 	path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "content")
 );
+const CONTENT_EXT = /\.(md|mdx|ya?ml|json)$/i;
 
 export function velitePlugin(): Plugin {
 	// SvelteKit fires buildStart twice (client + SSR). Share one run.
@@ -21,21 +22,33 @@ export function velitePlugin(): Plugin {
 			await pending;
 		},
 		configureServer(server) {
-			let timer: NodeJS.Timeout | null = null;
+			// Serialize rebuilds: velite writes to .velite/, so overlapping runs
+			// could corrupt output. Coalesce in-flight changes into a single rerun.
+			let running: Promise<void> | null = null;
+			let pendingRerun = false;
 			const rebuild = (p: string) => {
 				const n = normalizePath(p);
 				if (n !== CONTENT_DIR && !n.startsWith(CONTENT_DIR + "/")) return;
-				if (timer) clearTimeout(timer);
-				timer = setTimeout(async () => {
-					try {
-						await build();
-						server.ws.send({ type: "full-reload" });
-					} catch (err) {
-						server.config.logger.error(
-							`[velite] ${err instanceof Error ? err.message : String(err)}`
-						);
-					}
-				}, 50);
+				if (!CONTENT_EXT.test(n)) return;
+				if (running) {
+					pendingRerun = true;
+					return;
+				}
+				running = (async () => {
+					do {
+						pendingRerun = false;
+						try {
+							await build();
+							server.ws.send({ type: "full-reload" });
+						} catch (err) {
+							server.config.logger.error(
+								`[velite] ${err instanceof Error ? err.message : String(err)}`
+							);
+						}
+					} while (pendingRerun);
+				})().finally(() => {
+					running = null;
+				});
 			};
 			server.watcher.on("add", rebuild);
 			server.watcher.on("change", rebuild);

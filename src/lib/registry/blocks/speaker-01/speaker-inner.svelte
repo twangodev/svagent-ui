@@ -13,6 +13,7 @@
 		AudioPlayerProgress,
 		AudioPlayerTime,
 		exampleTracks,
+		precomputeWaveform as decodeAndSampleWaveform,
 		useAudioPlayer,
 	} from "$lib/registry/ui/audio-player/index.js";
 	import { Button } from "$lib/registry/ui/button/index.js";
@@ -36,12 +37,89 @@
 	const isPlayingRef: { current: boolean } = $state({ current: false });
 	const volumeRef: { current: number } = $state({ current: 0.7 });
 
+	// Scrolling waveform state. `BARS_PER_SECOND` keeps scroll speed and detail
+	// consistent across tracks of different lengths; the strip width is derived
+	// from the loaded waveform's actual bar count.
+	const BARS_PER_SECOND = 8;
+	const BAR_STEP = 5; // barWidth(3) + barGap(2)
+	let precomputedWaveform = $state<number[]>([]);
+	let waveformOffset = $state(0);
+	let containerWidthRef = { current: 300 };
+	let waveformEl = $state<HTMLDivElement | null>(null);
+	let waveformContainerEl = $state<HTMLDivElement | null>(null);
+	const totalWidth = $derived(precomputedWaveform.length * BAR_STEP);
+
 	// Keep volumeRef in sync with the reactive state.
 	$effect(() => {
 		volumeRef.current = volume;
 	});
 
-	// Load the first track on mount.
+	/**
+	 * Resolve a track's waveform in priority order:
+	 *   1. `track.waveform` — inline array, zero I/O
+	 *   2. `track.waveformUrl` — fetch a small JSON
+	 *   3. Decode the mp3 client-side via `OfflineAudioContext` (slow fallback)
+	 *
+	 * Each call tags its own request id so a fast track-switch discards stale
+	 * results instead of overwriting the active waveform.
+	 */
+	let waveformRequestId = 0;
+	async function loadWaveform(track: (typeof exampleTracks)[number]) {
+		const requestId = ++waveformRequestId;
+		let bars: number[] | null = null;
+
+		if (track.waveform && track.waveform.length > 0) {
+			bars = track.waveform;
+		} else if (track.waveformUrl) {
+			try {
+				const response = await fetch(track.waveformUrl);
+				if (response.ok) {
+					const json = await response.json();
+					if (Array.isArray(json)) bars = json;
+				}
+			} catch {
+				// Network or parse error — fall through to the client decode path.
+			}
+		}
+
+		if (!bars) {
+			try {
+				bars = await decodeAndSampleWaveform(track.url, BARS_PER_SECOND);
+			} catch (error) {
+				console.error("Error decoding waveform:", error);
+				return;
+			}
+		}
+
+		if (requestId === waveformRequestId) {
+			precomputedWaveform = bars;
+		}
+	}
+
+	// Measure the waveform container on mount + window resize.
+	$effect(() => {
+		const measure = () => {
+			if (waveformContainerEl) {
+				const rect = waveformContainerEl.getBoundingClientRect();
+				containerWidthRef.current = rect.width;
+			}
+		};
+		measure();
+		window.addEventListener("resize", measure);
+		return () => window.removeEventListener("resize", measure);
+	});
+
+	// Reset playhead + offset whenever a new waveform is ready.
+	$effect(() => {
+		if (precomputedWaveform.length > 0 && containerWidthRef.current > 0) {
+			waveformOffset = containerWidthRef.current;
+			if (player.audio) {
+				player.audio.currentTime = 0;
+			}
+		}
+	});
+
+	// Load the first track on mount + fetch its waveform.
 	$effect(() => {
 		const track = exampleTracks[0];
 		void player.setActiveItem({
@@ -49,6 +127,25 @@
 			src: track.url,
 			data: { name: track.name },
 		});
+		void loadWaveform(track);
+	});
+
+	// RAF loop: translate the waveform so the playhead (right edge of container)
+	// tracks the current audio time. Mirrors upstream's scroll math — position
+	// normalized against `audio.duration` — so playback and waveform end-of-
+	// track align even when bar count is derived from PCM duration.
+	$effect(() => {
+		let animationId: number;
+		const update = () => {
+			const audio = player.audio;
+			if (audio && !isNaN(audio.duration) && audio.duration > 0) {
+				const position = audio.currentTime / audio.duration;
+				waveformOffset = containerWidthRef.current - position * totalWidth;
+			}
+			animationId = requestAnimationFrame(update);
+		};
+		animationId = requestAnimationFrame(update);
+		return () => cancelAnimationFrame(animationId);
 	});
 
 	// Track the playing state (derived from player context).
@@ -131,6 +228,7 @@
 		const track = exampleTracks[index];
 		void player.play({ id: track.id, src: track.url, data: { name: track.name } });
 		showTrackList = false;
+		void loadWaveform(track);
 	}
 
 	function nextTrack() {
@@ -205,17 +303,31 @@
 					</div>
 				</div>
 
-				<div class="bg-foreground/10 relative h-12 overflow-hidden rounded-lg p-2 dark:bg-black/80">
-					<Waveform
-						data={audioDataRef.current}
-						height={32}
-						barWidth={3}
-						barGap={2}
-						fadeEdges={true}
-						fadeWidth={24}
-						barRadius={1}
-						barColor={isDark ? "#a1a1aa" : "#71717a"}
-					/>
+				<div
+					bind:this={waveformContainerEl}
+					class="waveform-container bg-foreground/10 relative h-12 overflow-hidden rounded-lg p-2 dark:bg-black/80"
+				>
+					<div class="relative h-full w-full overflow-hidden">
+						<div
+							bind:this={waveformEl}
+							style:transform="translateX({waveformOffset}px)"
+							style:transition="transform 0.016s linear"
+							style:width="{totalWidth}px"
+							style:position="absolute"
+							style:left="0"
+						>
+							<Waveform
+								data={precomputedWaveform.length > 0 ? precomputedWaveform : audioDataRef.current}
+								height={32}
+								barWidth={3}
+								barGap={2}
+								fadeEdges={true}
+								fadeWidth={24}
+								barRadius={1}
+								barColor={isDark ? "#a1a1aa" : "#71717a"}
+							/>
+						</div>
+					</div>
 				</div>
 
 				<div class="flex items-center gap-2">

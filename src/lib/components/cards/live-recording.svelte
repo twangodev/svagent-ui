@@ -13,21 +13,21 @@
 	});
 </script>
 
-<Card class="hidden w-full p-0 sm:flex">
-	<CardContent class="m-0! flex w-full flex-col p-1!">
-		<div class="flex flex-col justify-center">
+<Card class="hidden h-full w-full p-0 sm:flex">
+	<CardContent class="m-0! flex h-full w-full flex-col p-1!">
+		<div class="flex h-full min-h-0 flex-1 flex-col justify-center">
 			<div
-				class="bg-background relative overflow-hidden rounded-t-lg bg-gradient-to-r transition-opacity duration-1000 ease-out"
+				class="bg-background relative min-h-0 flex-1 overflow-hidden rounded-t-lg bg-gradient-to-r transition-opacity duration-1000 ease-out"
 			>
 				{#key remountKey}
 					<ScrollingWaveform
-						height={80}
+						height="100%"
 						barWidth={4}
 						barGap={2}
 						speed={50}
 						fadeEdges={true}
 						barCount={25}
-						class="opacity-90"
+						class="h-full opacity-90"
 					/>
 				{/key}
 			</div>

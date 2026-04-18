@@ -80,7 +80,7 @@
 </script>
 
 <div
-	class="bg-card relative mx-auto h-full w-full max-w-2xl min-h-0 flex-1 overflow-hidden rounded-lg border"
+	class="bg-card relative mx-auto h-full min-h-0 w-full max-w-2xl flex-1 overflow-hidden rounded-lg border"
 >
 	<Conversation.Root class="absolute inset-0">
 		<Conversation.Content>

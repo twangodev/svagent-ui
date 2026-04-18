@@ -51,9 +51,9 @@
 	<div class="flex flex-col gap-4 lg:col-span-6 xl:col-span-5">
 		<div class="hidden gap-1 sm:grid-cols-2 md:grid">
 			<VoiceChat02 />
-			<div class="pt-3 sm:pt-0 sm:pl-2 xl:pl-3">
+			<div class="flex h-full flex-col pt-3 sm:pt-0 sm:pl-2 xl:pl-3">
 				<MusicPlayer02 />
-				<div class="pt-3">
+				<div class="flex min-h-0 flex-1 pt-3">
 					<CardsLiveRecording />
 				</div>
 				<div class="pt-3">

@@ -1,52 +1,29 @@
-export const exampleTracks = [
-	{
-		id: "0",
-		name: "Alpha",
-		url: "https://svagent.ui.twango.dev/audio/alpha.mp3",
-	},
-	{
-		id: "1",
-		name: "Bravo",
-		url: "https://svagent.ui.twango.dev/audio/bravo.mp3",
-	},
-	{
-		id: "2",
-		name: "Charlie",
-		url: "https://svagent.ui.twango.dev/audio/charlie.mp3",
-	},
-	{
-		id: "3",
-		name: "Delta",
-		url: "https://svagent.ui.twango.dev/audio/delta.mp3",
-	},
-	{
-		id: "4",
-		name: "Echo",
-		url: "https://svagent.ui.twango.dev/audio/echo.mp3",
-	},
-	{
-		id: "5",
-		name: "Foxtrot",
-		url: "https://svagent.ui.twango.dev/audio/foxtrot.mp3",
-	},
-	{
-		id: "6",
-		name: "Golf",
-		url: "https://svagent.ui.twango.dev/audio/golf.mp3",
-	},
-	{
-		id: "7",
-		name: "Hotel",
-		url: "https://svagent.ui.twango.dev/audio/hotel.mp3",
-	},
-	{
-		id: "8",
-		name: "India",
-		url: "https://svagent.ui.twango.dev/audio/india.mp3",
-	},
-	{
-		id: "9",
-		name: "Juliett",
-		url: "https://svagent.ui.twango.dev/audio/juliett.mp3",
-	},
-];
+export type ExampleTrack = {
+	id: string;
+	name: string;
+	url: string;
+	/** Precomputed waveform bars inlined. Highest priority. */
+	waveform?: number[];
+	/** URL to a JSON file containing precomputed bars. Second priority. */
+	waveformUrl?: string;
+};
+
+const TRACK_NAMES = [
+	"alpha",
+	"bravo",
+	"charlie",
+	"delta",
+	"echo",
+	"foxtrot",
+	"golf",
+	"hotel",
+	"india",
+	"juliett",
+] as const;
+
+export const exampleTracks: ExampleTrack[] = TRACK_NAMES.map((name, i) => ({
+	id: String(i),
+	name: name.charAt(0).toUpperCase() + name.slice(1),
+	url: `https://svagent.ui.twango.dev/audio/${name}.mp3`,
+	waveformUrl: `https://svagent.ui.twango.dev/audio/waveforms/${name}.json`,
+}));

@@ -19,7 +19,7 @@
 			<MobileNav bind:this={mobileNavRef} class="flex lg:hidden" />
 			<Button href="/" variant="ghost" size="icon" class="hidden size-8 lg:flex">
 				<Logo class="size-5" />
-				<span class="sr-only">svagent-ui</span>
+				<span class="sr-only">sv11-ui</span>
 			</Button>
 			<MainNav items={mainNavItems} class="hidden lg:flex" />
 			<div class="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">

@@ -1,9 +1,9 @@
 ---
 title: Dark Mode
-description: Add light and dark themes to a svagent-ui project with mode-watcher.
+description: Add light and dark themes to a sv11-ui project with mode-watcher.
 ---
 
-svagent-ui relies on [`mode-watcher`](https://github.com/svecosystem/mode-watcher) to toggle a `.dark` class on the `<html>` element and persist the user's choice across sessions. Every component's dark styles are scoped to that class, so wiring mode-watcher into your root layout is all that's needed for themes to work.
+sv11-ui relies on [`mode-watcher`](https://github.com/svecosystem/mode-watcher) to toggle a `.dark` class on the `<html>` element and persist the user's choice across sessions. Every component's dark styles are scoped to that class, so wiring mode-watcher into your root layout is all that's needed for themes to work.
 
 ## Install mode-watcher
 
@@ -27,7 +27,7 @@ Render `<ModeWatcher />` once near the top of your root layout so the class is a
 {@render children()}
 ```
 
-The svagent-ui docs site renders it with `defaultMode="system"` and `disableTransitions`, which honors the user's OS preference on first load and suppresses the color-flash animation when the class flips:
+The sv11-ui docs site renders it with `defaultMode="system"` and `disableTransitions`, which honors the user's OS preference on first load and suppresses the color-flash animation when the class flips:
 
 ```svelte
 <ModeWatcher defaultMode="system" disableTransitions />
@@ -37,7 +37,7 @@ See the [mode-watcher documentation](https://mode-watcher.svecosystem.com) for t
 
 ## CSS setup
 
-svagent-ui's Tailwind entrypoint declares a custom variant that activates whenever an element has an ancestor with the `.dark` class:
+sv11-ui's Tailwind entrypoint declares a custom variant that activates whenever an element has an ancestor with the `.dark` class:
 
 ```css
 @custom-variant dark (&:is(.dark *));
@@ -55,7 +55,7 @@ The `:root` block defines the light-mode tokens, and a `.dark { ... }` block ove
 }
 ```
 
-Because every token is swapped in one place, you generally won't need to write your own `dark:` utilities — the existing components already pick up the right values automatically. If you are using a `data-theme` attribute or a different selector, svagent's dark styles will not activate.
+Because every token is swapped in one place, you generally won't need to write your own `dark:` utilities — the existing components already pick up the right values automatically. If you are using a `data-theme` attribute or a different selector, sv11's dark styles will not activate.
 
 ## Building a toggle
 
@@ -72,7 +72,7 @@ Because every token is swapped in one place, you generally won't need to write y
 </Button>
 ```
 
-This is the same pattern the svagent-ui docs site uses in its header mode switcher.
+This is the same pattern the sv11-ui docs site uses in its header mode switcher.
 
 ## Reading the current mode
 

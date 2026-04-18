@@ -5,19 +5,19 @@
 		{
 			id: "alpha",
 			name: "Alpha",
-			previewUrl: "https://svagent.ui.twango.dev/audio/alpha.mp3",
+			previewUrl: "https://sv11.ui.twango.dev/audio/alpha.mp3",
 			labels: { accent: "american", gender: "male", age: "middle_aged" },
 		},
 		{
 			id: "bravo",
 			name: "Bravo",
-			previewUrl: "https://svagent.ui.twango.dev/audio/bravo.mp3",
+			previewUrl: "https://sv11.ui.twango.dev/audio/bravo.mp3",
 			labels: { accent: "british", gender: "female", age: "young" },
 		},
 		{
 			id: "charlie",
 			name: "Charlie",
-			previewUrl: "https://svagent.ui.twango.dev/audio/charlie.mp3",
+			previewUrl: "https://sv11.ui.twango.dev/audio/charlie.mp3",
 			labels: { accent: "australian", gender: "male", age: "old" },
 		},
 	];

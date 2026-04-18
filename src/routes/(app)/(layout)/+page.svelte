@@ -18,7 +18,7 @@
 			style="background: radial-gradient(circle at center, transparent 0%, transparent 25%, color-mix(in oklab, var(--background) 50%, transparent) 50%, color-mix(in oklab, var(--background) 80%, transparent) 70%, color-mix(in oklab, var(--background) 95%, transparent) 85%, var(--background) 95%);"
 		></div>
 		<PageHeader class="relative z-10">
-			<PageHeaderHeading class="max-w-4xl">svagent-ui</PageHeaderHeading>
+			<PageHeaderHeading class="max-w-4xl">sv11-ui</PageHeaderHeading>
 			<PageHeaderDescription>{siteConfig.description}</PageHeaderDescription>
 			<PageActions>
 				<Button href="/docs" size="sm">Get Started</Button>

@@ -10,10 +10,10 @@
 </script>
 
 <svelte:head>
-	<title>Blocks | svagent-ui</title>
+	<title>Blocks | sv11-ui</title>
 	<meta
 		name="description"
-		content="A gallery of full-page blocks built with svagent-ui components."
+		content="A gallery of full-page blocks built with sv11-ui components."
 	/>
 </svelte:head>
 
@@ -21,7 +21,7 @@
 	<PageHeader>
 		<PageHeaderHeading>Blocks</PageHeaderHeading>
 		<PageHeaderDescription>
-			Full-page compositions built with svagent-ui components. Use them as-is or as starting points.
+			Full-page compositions built with sv11-ui components. Use them as-is or as starting points.
 		</PageHeaderDescription>
 		<PageActions>
 			<Button href="/docs/components" size="sm" variant="ghost">Browse Components</Button>

@@ -12,7 +12,7 @@
 
 	export type ThemeName = (typeof THEMES)[number]["name"];
 
-	const STORAGE_KEY = "svagent-theme";
+	const STORAGE_KEY = "sv11-theme";
 	const THEME_CLASSES = THEMES.filter((t) => t.name !== "default").map((t) => `theme-${t.name}`);
 
 	export function applyTheme(name: ThemeName) {

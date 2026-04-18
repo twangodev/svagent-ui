@@ -1,9 +1,9 @@
 ---
 title: Providers
-description: Provider-agnostic adapter interfaces for wiring svagent components to any backend.
+description: Provider-agnostic adapter interfaces for wiring sv11 components to any backend.
 ---
 
-svagent components do not ship with backend bindings. Instead, they consume small TypeScript adapter interfaces — you pass an object that conforms to the interface, and the component calls into it. Components plus adapters equal a working system, and you are free to wrap ElevenLabs, OpenAI, Deepgram, the Web Speech API, or any custom service.
+sv11 components do not ship with backend bindings. Instead, they consume small TypeScript adapter interfaces — you pass an object that conforms to the interface, and the component calls into it. Components plus adapters equal a working system, and you are free to wrap ElevenLabs, OpenAI, Deepgram, the Web Speech API, or any custom service.
 
 ## ConversationAdapter
 

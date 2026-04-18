@@ -1,15 +1,15 @@
 export const siteConfig = {
-	name: "svagent-ui",
-	url: "https://svagent.ui.twango.dev",
+	name: "sv11-ui",
+	url: "https://sv11.ui.twango.dev",
 	ogImage: {
-		url: "https://svagent.ui.twango.dev/og.png",
+		url: "https://sv11.ui.twango.dev/og.png",
 		width: "1200",
 		height: "630",
 	},
 	description:
 		"A component registry for building AI agent interfaces. Voice, chat, transcription, and visualization components for Svelte 5.",
 	keywords: [
-		"svagent-ui",
+		"sv11-ui",
 		"svelte ai components",
 		"svelte voice ui",
 		"svelte chat components",
@@ -22,6 +22,6 @@ export const siteConfig = {
 	],
 	links: {
 		x: "https://x.com/jamesding_dev",
-		github: "https://github.com/twangodev/svagent-ui",
+		github: "https://github.com/twangodev/sv11-ui",
 	},
 };

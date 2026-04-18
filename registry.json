@@ -1,7 +1,7 @@
 {
 	"$schema": "https://shadcn-svelte.com/schema/registry.json",
-	"name": "svagent",
-	"homepage": "https://svagent.ui.twango.dev",
+	"name": "sv11",
+	"homepage": "https://sv11.ui.twango.dev",
 	"items": [
 		{
 			"name": "audio-player",

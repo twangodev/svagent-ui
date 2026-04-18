@@ -1,9 +1,9 @@
 ---
 title: Adapters
-description: Recipes for wiring common voice and transcription providers into svagent components.
+description: Recipes for wiring common voice and transcription providers into sv11 components.
 ---
 
-svagent's voice and conversation components accept adapter objects that bridge a specific backend to a provider-agnostic interface. This section will collect recipes for implementing those adapters against common SDKs.
+sv11's voice and conversation components accept adapter objects that bridge a specific backend to a provider-agnostic interface. This section will collect recipes for implementing those adapters against common SDKs.
 
 The interface definitions themselves live on the [Providers](/docs/providers) page — the recipes here assume you have already read that reference.
 

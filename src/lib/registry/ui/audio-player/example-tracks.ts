@@ -24,6 +24,6 @@ const TRACK_NAMES = [
 export const exampleTracks: ExampleTrack[] = TRACK_NAMES.map((name, i) => ({
 	id: String(i),
 	name: name.charAt(0).toUpperCase() + name.slice(1),
-	url: `https://svagent.ui.twango.dev/audio/${name}.mp3`,
-	waveformUrl: `https://svagent.ui.twango.dev/audio/waveforms/${name}.json`,
+	url: `https://sv11.ui.twango.dev/audio/${name}.mp3`,
+	waveformUrl: `https://sv11.ui.twango.dev/audio/waveforms/${name}.json`,
 }));

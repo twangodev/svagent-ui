@@ -5,7 +5,7 @@ description: Wrap the @elevenlabs/client SDK in a ConversationAdapter.
 
 > **TODO:** Recipe content pending.
 
-This recipe will show how to wrap [`@elevenlabs/client`](https://www.npmjs.com/package/@elevenlabs/client) in a [`ConversationAdapter`](/docs/providers) so that ElevenLabs Agents plug into [ConversationBar](/docs/components/conversation-bar) without modifying any svagent code.
+This recipe will show how to wrap [`@elevenlabs/client`](https://www.npmjs.com/package/@elevenlabs/client) in a [`ConversationAdapter`](/docs/providers) so that ElevenLabs Agents plug into [ConversationBar](/docs/components/conversation-bar) without modifying any sv11 code.
 
 Planned content:
 

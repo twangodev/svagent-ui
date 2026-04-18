@@ -3,7 +3,7 @@ title: Audio Player
 description: A composable audio playback component with play/pause, seek, time display, and playback speed controls.
 component: true
 links:
-  source: https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/audio-player
+  source: https://github.com/twangodev/sv11-ui/tree/main/src/lib/registry/ui/audio-player
 ---
 
 <ComponentPreview name="audio-player-demo" />
@@ -188,7 +188,7 @@ The root surfaces the `<audio>` element's `MediaError` through `player.error`. R
 
 ## API Reference
 
-In addition to the root, the registry ships `AudioPlayerButton`, `AudioPlayerProgress`, `AudioPlayerTime`, `AudioPlayerDuration`, `AudioPlayerSpeed`, and `AudioPlayerSpeedButtonGroup` — see [source](https://github.com/twangodev/svagent-ui/tree/main/src/lib/registry/ui/audio-player) for their props.
+In addition to the root, the registry ships `AudioPlayerButton`, `AudioPlayerProgress`, `AudioPlayerTime`, `AudioPlayerDuration`, `AudioPlayerSpeed`, and `AudioPlayerSpeedButtonGroup` — see [source](https://github.com/twangodev/sv11-ui/tree/main/src/lib/registry/ui/audio-player) for their props.
 
 <ComponentAPI component="audio-player" />
 

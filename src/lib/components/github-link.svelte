@@ -7,7 +7,7 @@
 
 	async function getGithubStarCount() {
 		try {
-			const res = await fetch("https://ungh.cc/repos/twangodev/svagent-ui");
+			const res = await fetch("https://ungh.cc/repos/twangodev/sv11-ui");
 			const data = await res.json();
 			return data.repo?.stars ?? FALLBACK_STAR_COUNT;
 		} catch (error) {

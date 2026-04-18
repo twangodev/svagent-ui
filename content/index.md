@@ -3,18 +3,18 @@ title: Introduction
 description: A component registry for building AI agent interfaces with Svelte 5.
 ---
 
-svagent-ui is a component registry for building AI agent interfaces — a Svelte 5 port of [elevenlabs/ui](https://github.com/elevenlabs/ui), built on top of [shadcn-svelte](https://shadcn-svelte.com/). It provides pre-built components for voice, chat, transcription, audio, and visualization.
+sv11-ui is a component registry for building AI agent interfaces — a Svelte 5 port of [elevenlabs/ui](https://github.com/elevenlabs/ui), built on top of [shadcn-svelte](https://shadcn-svelte.com/). It provides pre-built components for voice, chat, transcription, audio, and visualization.
 
 Components are distributed via the `shadcn-svelte` CLI:
 
 ```bash
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/<component>.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/<component>.json
 ```
 
 For example, to install the [Orb](/docs/components/orb) component, you can run:
 
 ```bash
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/orb.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/orb.json
 ```
 
 <ComponentPreview name="orb-demo" />
@@ -26,4 +26,4 @@ npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/orb.json
 - **Tailwind CSS 4** — Styled with tailwind-variants and tailwind-merge.
 - **Accessible** — Built on bits-ui primitives.
 
-Browse the full list of components at [/docs/components](/docs/components), or view the [source code](https://github.com/twangodev/svagent-ui) on GitHub.
+Browse the full list of components at [/docs/components](/docs/components), or view the [source code](https://github.com/twangodev/sv11-ui) on GitHub.

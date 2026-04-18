@@ -92,7 +92,7 @@ function docSugar() {
 	const expandInstall = (/** @type {string} */ name) =>
 		[
 			"```bash",
-			`npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/${name}.json`,
+			`npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/${name}.json`,
 			"```",
 		].join("\n");
 

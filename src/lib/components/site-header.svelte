@@ -7,6 +7,8 @@
 	import MobileNav from "./mobile-nav.svelte";
 	import { mainNavItems } from "$lib/navigation.js";
 	import ModeSwitcher from "./mode-switcher.svelte";
+	import CommandMenu from "./command-menu.svelte";
+	import ThemeSelector from "./theme-selector.svelte";
 
 	let mobileNavRef: { closeMenu: () => void } | undefined;
 </script>
@@ -17,13 +19,17 @@
 			<MobileNav bind:this={mobileNavRef} class="flex lg:hidden" />
 			<Button href="/" variant="ghost" size="icon" class="hidden size-8 lg:flex">
 				<Logo class="size-5" />
-				<span class="sr-only">svagent-ui</span>
+				<span class="sr-only">sv11-ui</span>
 			</Button>
 			<MainNav items={mainNavItems} class="hidden lg:flex" />
 			<div class="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
+				<div class="w-full flex-1 md:w-auto md:flex-none">
+					<CommandMenu />
+				</div>
 				<Separator orientation="vertical" class="ms-2 hidden lg:block" />
 				<GithubLink />
 				<Separator orientation="vertical" />
+				<ThemeSelector />
 				<ModeSwitcher />
 			</div>
 		</div>

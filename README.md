@@ -1,10 +1,10 @@
-# svagent-ui
+# sv11-ui
 
-[svagent-ui](https://svagent.ui.twango.dev) is a Svelte 5 port of [elevenlabs/ui](https://github.com/elevenlabs/ui), built on top of [shadcn-svelte](https://shadcn-svelte.com/) to help you build AI agent interfaces faster.
+[sv11-ui](https://sv11.ui.twango.dev) is a Svelte 5 port of [elevenlabs/ui](https://github.com/elevenlabs/ui), built on top of [shadcn-svelte](https://shadcn-svelte.com/) to help you build AI agent interfaces faster.
 
 ## Overview
 
-svagent-ui brings the [ElevenLabs UI](https://ui.elevenlabs.io) component library to the Svelte ecosystem. Same components — orbs, waveforms, voice agents, audio players, conversation UIs, and more — rebuilt from the ground up for Svelte 5 and SvelteKit.
+sv11-ui brings the [ElevenLabs UI](https://ui.elevenlabs.io) component library to the Svelte ecosystem. Same components — orbs, waveforms, voice agents, audio players, conversation UIs, and more — rebuilt from the ground up for Svelte 5 and SvelteKit.
 
 This time, it's provider-agnostic by design. You can bring your own backend (ElevenLabs, OpenAI, Deepgram, or custom).
 
@@ -14,15 +14,15 @@ The CLI makes it easy to add these components to your SvelteKit project.
 
 ```bash
 # Using shadcn-svelte CLI
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/<component-name>.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/<component-name>.json
 
 # Install all components
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/all.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/all.json
 ```
 
 ## Prerequisites
 
-Before using svagent-ui, ensure your SvelteKit project meets these requirements:
+Before using sv11-ui, ensure your SvelteKit project meets these requirements:
 
 - **Node.js 18** or later
 - **shadcn-svelte** initialized in your project
@@ -35,19 +35,19 @@ Before using svagent-ui, ensure your SvelteKit project meets these requirements:
 
 ```bash
 # Install the message component
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/message.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/message.json
 
 # Install the audio player
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/audio-player.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/audio-player.json
 
 # Install the orb
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/orb.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/orb.json
 ```
 
 ### Install All Components
 
 ```bash
-npx shadcn-svelte@latest add https://svagent.ui.twango.dev/r/all.json
+npx shadcn-svelte@latest add https://sv11.ui.twango.dev/r/all.json
 ```
 
 ## Components

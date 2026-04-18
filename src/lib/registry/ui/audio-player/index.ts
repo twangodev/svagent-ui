@@ -28,3 +28,4 @@ export { setAudioPlayer, useAudioPlayer, AudioPlayerState } from "./context.svel
 export type { AudioPlayerItem } from "./context.svelte.js";
 export { formatTime } from "./utils.js";
 export { exampleTracks } from "./example-tracks.js";
+export { precomputeWaveform, sampleWaveform } from "./waveform-sampler.js";

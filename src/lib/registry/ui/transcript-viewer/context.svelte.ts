@@ -13,7 +13,7 @@ export type AudioType =
 	| "audio/aac"
 	| "audio/webm";
 
-const TRANSCRIPT_VIEWER_CONTEXT_KEY = Symbol("svagent-transcript-viewer");
+const TRANSCRIPT_VIEWER_CONTEXT_KEY = Symbol("sv11-transcript-viewer");
 
 /**
  * Reactive state shared between a `<TranscriptViewer>` root and its sub-components

@@ -49,6 +49,10 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Install ffmpeg
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: ffmpeg
       - name: Build site
         run: pnpm build
       - name: Upload Pages artifact

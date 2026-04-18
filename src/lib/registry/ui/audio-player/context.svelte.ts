@@ -1,6 +1,6 @@
 import { getContext, setContext } from "svelte";
 
-const AUDIO_PLAYER_CONTEXT_KEY = Symbol("svagent-audio-player");
+const AUDIO_PLAYER_CONTEXT_KEY = Symbol("sv11-audio-player");
 
 export interface AudioPlayerItem<TData = unknown> {
 	id: string | number;

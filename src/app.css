@@ -8,6 +8,7 @@
 @import "@fontsource-variable/geist-mono/index.css";
 
 @import "./lib/registry/styles/style-vega.css" layer(base);
+@import "./lib/styles/themes.css";
 
 @custom-variant dark (&:is(.dark *));
 

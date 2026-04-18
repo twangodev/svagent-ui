@@ -24,11 +24,11 @@
 	} from "$lib/registry/ui/transcript-viewer/index.js";
 	import { Skeleton } from "$lib/registry/ui/skeleton/index.js";
 
-	const audioSrc = "https://svagent.ui.twango.dev/audio/transcript-viewer.wav";
+	const audioSrc = "https://sv11.ui.twango.dev/audio/transcript-viewer.wav";
 	let alignment = $state<CharacterAlignment | undefined>(undefined);
 
 	onMount(() => {
-		fetch("https://svagent.ui.twango.dev/audio/transcript-viewer-alignment.json")
+		fetch("https://sv11.ui.twango.dev/audio/transcript-viewer-alignment.json")
 			.then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.statusText))))
 			.then((data: CharacterAlignment) => {
 				alignment = data;

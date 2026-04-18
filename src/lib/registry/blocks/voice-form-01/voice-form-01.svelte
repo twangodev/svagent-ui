@@ -54,7 +54,6 @@
 
 	function onSubmit(event: SubmitEvent) {
 		event.preventDefault();
-		console.log("Form submitted:", $state.snapshot(values));
 	}
 </script>
 
@@ -84,16 +83,32 @@
 								id="voice-form-01-first-name"
 								placeholder="John"
 								bind:value={values.firstName}
+								aria-invalid={errors.firstName ? "true" : undefined}
+								aria-describedby={errors.firstName ? "voice-form-01-first-name-error" : undefined}
 							/>
 							{#if errors.firstName}
-								<p class="text-destructive text-sm">{errors.firstName}</p>
+								<p
+									id="voice-form-01-first-name-error"
+									class="text-destructive text-sm"
+									role="alert"
+								>
+									{errors.firstName}
+								</p>
 							{/if}
 						</div>
 						<div class="space-y-2">
 							<Label for="voice-form-01-last-name">Last Name *</Label>
-							<Input id="voice-form-01-last-name" placeholder="Doe" bind:value={values.lastName} />
+							<Input
+								id="voice-form-01-last-name"
+								placeholder="Doe"
+								bind:value={values.lastName}
+								aria-invalid={errors.lastName ? "true" : undefined}
+								aria-describedby={errors.lastName ? "voice-form-01-last-name-error" : undefined}
+							/>
 							{#if errors.lastName}
-								<p class="text-destructive text-sm">{errors.lastName}</p>
+								<p id="voice-form-01-last-name-error" class="text-destructive text-sm" role="alert">
+									{errors.lastName}
+								</p>
 							{/if}
 						</div>
 					</div>

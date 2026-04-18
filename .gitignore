@@ -28,6 +28,9 @@ src/__registry__
 # Waveforms (generated at build time by `pnpm generate:waveforms`)
 /static/audio/waveforms
 
+# Changelog (generated)
+/content/changelog.md
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

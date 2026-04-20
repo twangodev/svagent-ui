@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from "svelte";
 	import Music from "@lucide/svelte/icons/music";
 	import SkipBack from "@lucide/svelte/icons/skip-back";
 	import SkipForward from "@lucide/svelte/icons/skip-forward";
@@ -42,10 +43,7 @@
 	const BARS_PER_SECOND = 8;
 	const BAR_STEP = 5;
 	let precomputedWaveform = $state<number[]>([]);
-	// Guards against a late-arriving decode rewinding the user mid-listen on a
-	// track they've already switched to.
 	let loadedTrackId = $state<string | null>(null);
-	let lastResetTrackId: string | null = null;
 	let containerWidthRef = { current: 300 };
 	let waveformContainerEl = $state<HTMLDivElement | null>(null);
 	const totalWidth = $derived(precomputedWaveform.length * BAR_STEP);
@@ -108,22 +106,17 @@
 	});
 
 	$effect(() => {
-		if (
-			precomputedWaveform.length > 0 &&
-			containerWidthRef.current > 0 &&
-			loadedTrackId !== null &&
-			loadedTrackId !== lastResetTrackId
-		) {
+		if (loadedTrackId !== null && containerWidthRef.current > 0) {
 			scrub.offset = containerWidthRef.current;
-			if (player.audio) player.audio.currentTime = 0;
-			lastResetTrackId = loadedTrackId;
 		}
 	});
 
 	$effect(() => {
-		const track = exampleTracks[0];
-		void player.setActiveItem({ id: track.id, src: track.url, data: { name: track.name } });
-		void loadWaveform(track);
+		untrack(() => {
+			const track = exampleTracks[0];
+			void player.setActiveItem({ id: track.id, src: track.url, data: { name: track.name } });
+			void loadWaveform(track);
+		});
 	});
 
 	// Playhead RAF: only drives offset when the user isn't driving it themselves.

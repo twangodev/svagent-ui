@@ -3,6 +3,6 @@ title: Components
 description: Browse the available components in sv11-ui.
 ---
 
-# Components
+Browse the available components. Each is provider-agnostic and composable — wire them to any backend via the [adapter interfaces](/docs/providers).
 
-Browse the available components. Each component is designed to be provider-agnostic and composable.
+<ComponentsList />

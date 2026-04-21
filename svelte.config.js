@@ -8,7 +8,13 @@ import { extractAllProps } from "./scripts/extract-props.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), docSugar(), mdsx(mdsxConfig), componentPreviews()],
+	preprocess: [
+		vitePreprocess(),
+		docSugar(),
+		mdsx(mdsxConfig),
+		componentPreviews(),
+		componentsList(),
+	],
 	extensions: [".svelte", ".md"],
 
 	kit: {
@@ -243,6 +249,39 @@ function componentPreviews() {
 				// Found instance script - inject imports right after the opening tag
 				const insertPos = scriptMatch.index + scriptMatch[0].length;
 				ms.appendRight(insertPos, "\n" + imports.join("\n"));
+				break;
+			}
+
+			return { code: ms.toString(), map: ms.generateMap() };
+		},
+	};
+}
+
+/**
+ * Injects a ComponentsList import whenever `<ComponentsList />` appears in a
+ * .md doc. Mirrors componentPreviews(): runs after mdsx so the instance
+ * <script> tag exists.
+ *
+ * @returns {import("svelte/compiler").PreprocessorGroup}
+ */
+function componentsList() {
+	const TARGET = "<ComponentsList";
+
+	return {
+		name: "inject-components-list",
+		markup: ({ content, filename }) => {
+			if (!filename?.endsWith(".md") || !content.includes(TARGET)) return;
+			if (!content.includes("<script>") && !content.includes("<script ")) return;
+
+			const ms = new MagicString(content);
+			const importLine = `import ComponentsList from "$lib/components/components-list.svelte";`;
+
+			const scriptRegex = /<script(?:\s[^>]*)?>|<script>/g;
+			let scriptMatch;
+			while ((scriptMatch = scriptRegex.exec(content)) !== null) {
+				if (scriptMatch[0].includes("module")) continue;
+				const insertPos = scriptMatch.index + scriptMatch[0].length;
+				ms.appendRight(insertPos, "\n" + importLine);
 				break;
 			}
 

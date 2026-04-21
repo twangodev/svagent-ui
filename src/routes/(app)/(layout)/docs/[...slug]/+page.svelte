@@ -77,7 +77,7 @@
 					</p>
 				{/if}
 			</div>
-			<div class="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+			<div class="mt-6 w-full flex-1 *:data-[slot=alert]:first:mt-0">
 				<Markdown />
 			</div>
 		</div>
